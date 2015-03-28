@@ -8,7 +8,7 @@ PORT = 4242
 
 def open_url(url):
     tn = telnetlib.Telnet(HOST, PORT)
-    cmd = "content.location.href = '{url}'".format(url=url)
+    cmd = "content.location.href = 'http://{url}'".format(url=url)
     tn.read_until("repl> ")
     tn.write(cmd + "\n")
     tn.write("repl.quit()\n")

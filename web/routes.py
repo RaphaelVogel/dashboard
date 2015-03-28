@@ -5,29 +5,26 @@ fake = False
 
 @route('/')
 def index():
-    return static_file('index.html', root='./ha2/web')
+    return static_file('index.html', root='./dashboard/web')
 
-@route('/haui/<filepath:path>')
+
+@route('/lib/<filepath:path>')
 def serve_static(filepath):
-    return static_file(filepath, root='./ha2/web/haui')
+    return static_file(filepath, root='./dashboard/web/lib')
 
 
-@route('/ui5lib/<filepath:path>')
-def serve_static(filepath):
-    return static_file(filepath, root='./ha2/web/ui5lib')
-
-
-@route('/pages/<filepath:path>')
-def serve_static(filepath):
-    return static_file(filepath, root='./ha2/web/pages')
-
-
-# Solar inverter API
-# -------------------------------------------------------------------
-@route('/solar/current')
-def current_solarproduction():
-    current_data = ""
-    if current_data:
-        return current_data
+@route('/monitor/<status>')
+def switch_monitor(status):
+    if status == "ON":
+        monitor.switch_on()
+    elif status == "OFF":
+        monitor.switch_off()
     else:
-        return HTTPResponse(dict(error="Could not read solar production values"), status=500)
+        return HTTPResponse(dict(error="Wrong url to switch monitor, use ON or OFF"), status=500)
+
+    return dict(status="OK")
+
+
+@route('/setURL/<url>')
+def set_url(url):
+    iceweasel.open_url(url)
