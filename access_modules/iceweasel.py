@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # MozRepl Plugin must be installed and r-kiosk Plugin for fullscreen
 import telnetlib
 

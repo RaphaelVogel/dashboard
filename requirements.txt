@@ -1,4 +1,4 @@
-# install modules with: pip3 install -r /path/to/requirements.txt
+# install modules with: pip install -r /path/to/requirements.txt
 bottle
 cherrypy
 requests
