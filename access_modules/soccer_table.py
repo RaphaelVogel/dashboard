@@ -7,9 +7,9 @@ SOCCER_2_URL = "http://www.dfb.de/2-bundesliga/spieltagtabelle/"
 
 def get_table_data(liga):
     if liga == "1":
-        resp = requests.get(SOCCER_1_URL, proxies={'http': 'http://proxy:8080'})
+        resp = requests.get(SOCCER_1_URL)
     else:
-        resp = requests.get(SOCCER_2_URL, proxies={'http': 'http://proxy:8080'})
+        resp = requests.get(SOCCER_2_URL)
     if resp.status_code != 200:
         return "ERROR: Cannot connect to soccer url"
 
