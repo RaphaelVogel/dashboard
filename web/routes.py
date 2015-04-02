@@ -1,8 +1,8 @@
-from bottle import route, static_file, request, HTTPResponse
-from access_modules import iceweasel, monitor
+from bottle import route, static_file, request, HTTPResponse, view
+from access_modules import iceweasel, monitor, soccer_table
 
-fake = False
 
+# --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
     return static_file('index.html', root='./dashboard/web')
@@ -28,3 +28,12 @@ def switch_monitor(status):
 @route('/setURL/<url>')
 def set_url(url):
     iceweasel.open_url(url)
+    return dict(status="OK")
+
+
+# --- Button pressed routes ------------------------------------------------------------------------------------------
+@route('/soccerTable/<liga>')
+@view('soccer_ranking')
+def show_soccer_table(liga):
+    data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
+    return dict(liga=liga, table=data)
