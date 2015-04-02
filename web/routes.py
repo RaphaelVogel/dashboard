@@ -5,12 +5,12 @@ from access_modules import iceweasel, monitor, soccer_table
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
-    return static_file('index.html', root='./dashboard/web')
+    return static_file('index.html', root='./web')
 
 
 @route('/lib/<filepath:path>')
 def serve_static(filepath):
-    return static_file(filepath, root='./dashboard/web/lib')
+    return static_file(filepath, root='./web/lib')
 
 
 @route('/monitor/<status>')
