@@ -38,10 +38,6 @@ def turn_monitor_off():
             monitor.switch_off()
 
 
-t = Thread(target=turn_monitor_off)
-t.run()
-
-
 # --- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
     status = monitor.status()
@@ -57,35 +53,41 @@ def display_soccer_table2():
     iceweasel.open_url("localhost:8080/soccerTable/2")
 
 
+def setup_touch_loop():
+    # --- Setup the MPR121 device ------------------------------------------------------------------------------------
+    cap = MPR121.MPR121()
+    if not cap.begin():
+        print 'Failed to initialize MPR121, check your wiring!'
+        sys.exit(1)
 
-# --- Setup the MPR121 device ----------------------------------------------------------------------------------------
-cap = MPR121.MPR121()
-if not cap.begin():
-    print 'Failed to initialize MPR121, check your wiring!'
-    sys.exit(1)
+    # Configure GPIO library to listen on IRQ pin for changes.
+    # Be sure to configure pin with a pull-up because it is open collector when not
+    # enabled.
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(IRQ_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.add_event_detect(IRQ_PIN, GPIO.FALLING)
+    atexit.register(GPIO.cleanup)
 
-# Configure GPIO library to listen on IRQ pin for changes.
-# Be sure to configure pin with a pull-up because it is open collector when not
-# enabled.
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(IRQ_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.add_event_detect(IRQ_PIN, GPIO.FALLING)
-atexit.register(GPIO.cleanup)
+    # Clear any pending interrupts by reading touch state.
+    cap.touched()
 
-# Clear any pending interrupts by reading touch state.
-cap.touched()
+    while True:
+        # Wait for the IRQ pin to drop or too much time ellapses (to help prevent
+        # missing an IRQ event and waiting forever).
+        start = time.time()
+        while (time.time() - start) < MAX_EVENT_WAIT_SECONDS and not GPIO.event_detected(IRQ_PIN):
+            time.sleep(EVENT_WAIT_SLEEP_SECONDS)
+        # Read touch state.
+        touched = cap.touched()
+        # Check which ey presses for any touched keys.
+        for pin, function_to_call in PIN_METHOD_MAPPING.iteritems():
+            pin_bit = 1 << pin
+            if touched & pin_bit:
+                if function_to_call:
+                    eval(function_to_call)
 
-while True:
-    # Wait for the IRQ pin to drop or too much time ellapses (to help prevent
-    # missing an IRQ event and waiting forever).
-    start = time.time()
-    while (time.time() - start) < MAX_EVENT_WAIT_SECONDS and not GPIO.event_detected(IRQ_PIN):
-        time.sleep(EVENT_WAIT_SLEEP_SECONDS)
-    # Read touch state.
-    touched = cap.touched()
-    # Check which ey presses for any touched keys.
-    for pin, function_to_call in PIN_METHOD_MAPPING.iteritems():
-        pin_bit = 1 << pin
-        if touched & pin_bit:
-            if function_to_call:
-                eval(function_to_call)
+
+if __name__ == '__main__':
+    t = Thread(target=turn_monitor_off)
+    t.run()
+    setup_touch_loop()
