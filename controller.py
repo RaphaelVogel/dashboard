@@ -27,6 +27,17 @@ IRQ_PIN = 26
 MAX_EVENT_WAIT_SECONDS = 0.7
 EVENT_WAIT_SLEEP_SECONDS = 0.3
 
+
+def display_soccer_table1():
+    monitor.switch_on()
+    iceweasel.open_url("localhost:8080/soccerTable/1")
+
+
+def display_soccer_table2():
+    monitor.switch_on()
+    iceweasel.open_url("localhost:8080/soccerTable/2")
+
+
 # Setup the MPR121 device.
 cap = MPR121.MPR121()
 if not cap.begin():
@@ -58,13 +69,3 @@ while True:
         if touched & pin_bit:
             if function_to_call:
                 eval(function_to_call)
-
-
-def display_soccer_table1():
-    monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerTable/1")
-
-
-def display_soccer_table2():
-    monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerTable/2")
