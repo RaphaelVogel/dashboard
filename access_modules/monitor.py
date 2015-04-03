@@ -1,10 +1,18 @@
 #!/usr/bin/python
-import os
+import subprocess
 
 
 def switch_off():
-    os.system('sudo /opt/vc/bin/tvservice -o')
+    subprocess.call("sudo /opt/vc/bin/tvservice -o", shell=True)
 
 
 def switch_on():
-    os.system("sudo /opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7")
+    subprocess.call("sudo /opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7", shell=True)
+
+
+def status():
+    out = subprocess.check_output("sudo /opt/vc/bin/tvservice -s", shell=True)
+    if "TV is off" in out:
+        return "OFF"
+    else:
+        return "ON"

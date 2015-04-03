@@ -29,12 +29,16 @@ EVENT_WAIT_SLEEP_SECONDS = 0.1
 
 #--- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
-    monitor.switch_on()
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
 
 
 def display_soccer_table2():
-    monitor.switch_on()
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
 
 
