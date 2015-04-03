@@ -33,12 +33,13 @@ EVENT_WAIT_SLEEP_SECONDS = 0.1
 def turn_monitor_off():
     while True:
         time.sleep(30)
-        monitor.switch_off()
+        status = monitor.status()
+        if status == "ON":
+            monitor.switch_off()
 
 
-thread = Thread(target=turn_monitor_off)
-thread.daemon = True
-thread.run()
+t = Thread(target=turn_monitor_off)
+t.run()
 
 
 # --- Define functions to call if button is touched ------------------------------------------------------------------
