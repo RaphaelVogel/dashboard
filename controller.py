@@ -33,9 +33,7 @@ EVENT_WAIT_SLEEP_SECONDS = 0.1
 def turn_monitor_off():
     while True:
         time.sleep(30)
-        status = monitor.status()
-        if status == "ON":
-            monitor.switch_off()
+        monitor.switch_off()
 
 
 thread = Thread(target=turn_monitor_off)
