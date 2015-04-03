@@ -24,10 +24,10 @@ PIN_METHOD_MAPPING = {
 }
 
 IRQ_PIN = 26
-MAX_EVENT_WAIT_SECONDS = 0.7
-EVENT_WAIT_SLEEP_SECONDS = 0.3
+MAX_EVENT_WAIT_SECONDS = 0.8
+EVENT_WAIT_SLEEP_SECONDS = 0.1
 
-
+#--- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
     monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
@@ -38,7 +38,8 @@ def display_soccer_table2():
     iceweasel.open_url("localhost:8080/soccerTable/2")
 
 
-# Setup the MPR121 device.
+
+#--- Setup the MPR121 device ----------------------------------------------------------------------------------------
 cap = MPR121.MPR121()
 if not cap.begin():
     print 'Failed to initialize MPR121, check your wiring!'
