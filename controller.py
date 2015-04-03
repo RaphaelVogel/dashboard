@@ -3,6 +3,7 @@ from access_modules import iceweasel, monitor
 import sys
 import time
 import atexit
+from threading import Thread
 
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -27,7 +28,18 @@ IRQ_PIN = 26
 MAX_EVENT_WAIT_SECONDS = 0.5
 EVENT_WAIT_SLEEP_SECONDS = 0.1
 
-#--- Define functions to call if button is touched ------------------------------------------------------------------
+
+# --- Start thread to turn off monitor ------------------------------------------------------------------------------
+def turn_monitor_off():
+    time.sleep(30)
+    monitor.switch_off()
+
+
+thread = Thread(target=turn_monitor_off)
+thread.run()
+
+
+# --- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
     status = monitor.status()
     if status == "OFF":
@@ -43,7 +55,7 @@ def display_soccer_table2():
 
 
 
-#--- Setup the MPR121 device ----------------------------------------------------------------------------------------
+# --- Setup the MPR121 device ----------------------------------------------------------------------------------------
 cap = MPR121.MPR121()
 if not cap.begin():
     print 'Failed to initialize MPR121, check your wiring!'
