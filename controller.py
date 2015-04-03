@@ -25,8 +25,8 @@ PIN_METHOD_MAPPING = {
 }
 
 IRQ_PIN = 26
-MAX_EVENT_WAIT_SECONDS = 0.5
-EVENT_WAIT_SLEEP_SECONDS = 0.1
+MAX_EVENT_WAIT_SECONDS = 0.8
+EVENT_WAIT_SLEEP_SECONDS = 0.2
 
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
@@ -89,5 +89,5 @@ def setup_touch_loop():
 
 if __name__ == '__main__':
     t = Thread(target=turn_monitor_off)
-    t.run()
+    t.start()
     setup_touch_loop()
