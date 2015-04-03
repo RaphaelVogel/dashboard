@@ -53,11 +53,11 @@ while True:
     # Read touch state.
     touched = cap.touched()
     # Check which ey presses for any touched keys.
-    for pin, call_method in PIN_METHOD_MAPPING.iteritems():
+    for pin, function_to_call in PIN_METHOD_MAPPING.iteritems():
         pin_bit = 1 << pin
         if touched & pin_bit:
-            if call_method:
-                eval(call_method)
+            if function_to_call:
+                eval(function_to_call)
 
 
 def display_soccer_table1():
