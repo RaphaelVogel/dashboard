@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <title>Tabelle der {{liga}}. Bundesliga</title>
   </head>
-  <body class="container">
+  <body class="container" style="font-size:1.2em">
     <div class="col-lg-12">
       <table class="table table-striped">
         <thead>

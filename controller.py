@@ -24,7 +24,7 @@ PIN_METHOD_MAPPING = {
 }
 
 IRQ_PIN = 26
-MAX_EVENT_WAIT_SECONDS = 0.8
+MAX_EVENT_WAIT_SECONDS = 0.5
 EVENT_WAIT_SLEEP_SECONDS = 0.1
 
 #--- Define functions to call if button is touched ------------------------------------------------------------------
