@@ -5,6 +5,7 @@ from collections import OrderedDict
 SOCCER_1_URL = "http://www.dfb.de/bundesliga/spieltagtabelle/"
 SOCCER_2_URL = "http://www.dfb.de/2-bundesliga/spieltagtabelle/"
 
+
 def get_table_data(liga):
     if liga == "1":
         resp = requests.get(SOCCER_1_URL)
