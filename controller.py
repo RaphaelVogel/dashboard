@@ -39,6 +39,7 @@ def turn_monitor_off():
 
 
 thread = Thread(target=turn_monitor_off)
+thread.daemon = True
 thread.run()
 
 
