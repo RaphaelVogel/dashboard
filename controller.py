@@ -9,8 +9,8 @@ import RPi.GPIO as GPIO
 
 # Define mapping of capacitive touch pin to method calls
 PIN_METHOD_MAPPING = {
-    0: "display_soccer_table1",
-    1: "display_soccer_table2",
+    0: "display_soccer_table1()",
+    1: "display_soccer_table2()",
     2: None,
     3: None,
     4: None,
