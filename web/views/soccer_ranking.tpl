@@ -30,7 +30,7 @@
         % for club in table:
           <tr>
             <td>{{club['rank']}}</td>
-            <td><img src="{{club['image']}}" height="25" width="25"> {{club['name']}}</td>
+            <td><img src="{{club['image']}}" height="26" width="26"> {{club['name']}}</td>
             <td>{{club['games']}}</td>
             <td>{{club['won']}}</td>
             <td>{{club['equal']}}</td>
