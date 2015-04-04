@@ -108,6 +108,4 @@ def setup_touch_loop():
 
 
 if __name__ == '__main__':
-    t = Thread(target=turn_monitor_off)
-    t.start()
     setup_touch_loop()
