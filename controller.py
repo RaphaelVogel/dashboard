@@ -28,12 +28,15 @@ IRQ_PIN = 26
 MAX_EVENT_WAIT_SECONDS = 0.8
 EVENT_WAIT_SLEEP_SECONDS = 0.2
 
+TIMER_RUNNING = False
+TIMER_START = 60.0
+
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
 def turn_monitor_off():
     monitor.switch_off()
-
-timer = Timer(60.0, turn_monitor_off)
+    global TIMER_RUNNING
+    TIMER_RUNNING = False
 
 
 # --- Define functions to call if button is touched ------------------------------------------------------------------
@@ -42,8 +45,11 @@ def display_soccer_table1():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
-    if not timer.isAlive():
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
 
 
 def display_soccer_table2():
@@ -51,8 +57,11 @@ def display_soccer_table2():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
-    if not timer.isAlive():
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
 
 
 def display_current_weather():
@@ -60,8 +69,11 @@ def display_current_weather():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentWeather")
-    if not timer.isAlive():
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
 
 
 def display_current_solar():
@@ -69,8 +81,11 @@ def display_current_solar():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentSolar")
-    if not timer.isAlive():
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
