@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
+    <style type="text/css">
+    body { font-size: 16px !important; }
+</style>
     <title>Tabelle der {{liga}}. Bundesliga</title>
   </head>
   <body class="container" style="font-size:1.2em">
