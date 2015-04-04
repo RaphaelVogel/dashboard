@@ -12,7 +12,7 @@ import RPi.GPIO as GPIO
 PIN_METHOD_MAPPING = {
     0: "display_soccer_table1()",
     1: "display_soccer_table2()",
-    2: None,
+    2: "display_current_weather()",
     3: None,
     4: None,
     5: None,
@@ -53,8 +53,15 @@ def display_soccer_table2():
     iceweasel.open_url("localhost:8080/soccerTable/2")
 
 
+def display_current_weather():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/currentWeather")
+
+
+# --- Setup the MPR121 device ------------------------------------------------------------------------------------
 def setup_touch_loop():
-    # --- Setup the MPR121 device ------------------------------------------------------------------------------------
     cap = MPR121.MPR121()
     if not cap.begin():
         print 'Failed to initialize MPR121, check your wiring!'

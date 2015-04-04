@@ -1,5 +1,5 @@
 from bottle import route, static_file, request, HTTPResponse, view
-from access_modules import iceweasel, monitor, soccer_table
+from access_modules import iceweasel, monitor, soccer_table, current_weather
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -37,3 +37,10 @@ def set_url(url):
 def show_soccer_table(liga):
     data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
     return dict(liga=liga, table=data)
+
+
+@route('/currentWeather')
+@view('current_weather')
+def show_current_weather():
+    data = current_weather.get_weather_data()  # a dictionary of weather data
+    return dict(weather=data)

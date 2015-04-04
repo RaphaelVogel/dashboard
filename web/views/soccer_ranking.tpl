@@ -10,7 +10,7 @@
     </style>
     <title>Tabelle der {{liga}}. Bundesliga</title>
   </head>
-  <body class="container" style="font-size:1.2em">
+  <body class="container">
     <div class="col-lg-12">
       <table class="table table-striped">
         <thead>
