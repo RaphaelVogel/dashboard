@@ -29,7 +29,7 @@ MAX_EVENT_WAIT_SECONDS = 0.8
 EVENT_WAIT_SLEEP_SECONDS = 0.2
 
 TIMER_RUNNING = False
-TIMER_START = 60.0
+TIMER_START = 120.0
 
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
