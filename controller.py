@@ -13,7 +13,7 @@ PIN_METHOD_MAPPING = {
     0: "display_soccer_table1()",
     1: "display_soccer_table2()",
     2: "display_current_weather()",
-    3: None,
+    3: "display_current_solar()",
     4: None,
     5: None,
     6: None,
@@ -58,6 +58,13 @@ def display_current_weather():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentWeather")
+
+
+def display_current_solar():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/currentSolar")
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
