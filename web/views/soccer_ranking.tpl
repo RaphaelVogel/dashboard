@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <style type="text/css">
-    body { font-size: 15px !important; }
+    body { font-size: 1.1em !important; }
 </style>
     <title>Tabelle der {{liga}}. Bundesliga</title>
   </head>
