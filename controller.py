@@ -33,7 +33,7 @@ EVENT_WAIT_SLEEP_SECONDS = 0.2
 def turn_monitor_off():
     monitor.switch_off()
 
-timer = Timer(180.0, turn_monitor_off)
+timer = Timer(60.0, turn_monitor_off)
 
 
 # --- Define functions to call if button is touched ------------------------------------------------------------------
