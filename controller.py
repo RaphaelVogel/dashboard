@@ -3,7 +3,7 @@ from access_modules import iceweasel, monitor
 import sys
 import time
 import atexit
-from threading import Thread
+from threading import Timer
 
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -31,11 +31,9 @@ EVENT_WAIT_SLEEP_SECONDS = 0.2
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
 def turn_monitor_off():
-    while True:
-        time.sleep(180)
-        status = monitor.status()
-        if status == "ON":
-            monitor.switch_off()
+    monitor.switch_off()
+
+timer = Timer(180.0, turn_monitor_off)
 
 
 # --- Define functions to call if button is touched ------------------------------------------------------------------
@@ -44,6 +42,8 @@ def display_soccer_table1():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
+    if not timer.isAlive():
+        timer.start()
 
 
 def display_soccer_table2():
@@ -51,6 +51,8 @@ def display_soccer_table2():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
+    if not timer.isAlive():
+        timer.start()
 
 
 def display_current_weather():
@@ -58,6 +60,8 @@ def display_current_weather():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentWeather")
+    if not timer.isAlive():
+        timer.start()
 
 
 def display_current_solar():
@@ -65,6 +69,8 @@ def display_current_solar():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentSolar")
+    if not timer.isAlive():
+        timer.start()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
