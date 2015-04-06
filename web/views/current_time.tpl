@@ -77,6 +77,7 @@
   </head>
 
   <body>
+    <p></p><p></p><p></p><p></p>
 	<ul id="clock">
 	   	<li id="sec"></li>
 	   	<li id="hour"></li>
