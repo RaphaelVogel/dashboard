@@ -59,13 +59,6 @@
 
               setInterval( function() {
                   var hours = new Date().getHours();
-                  var tz = new Date().getTimezoneOffset();
-                  if(tz == -120){
-                    hours += 2
-                  }
-                  else if (tz == -60){
-                    hours += 1
-                  }
                   var mins = new Date().getMinutes();
                   var hdegree = hours * 30 + (mins / 2);
                   var hrotate = "rotate(" + hdegree + "deg)";
