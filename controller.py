@@ -14,7 +14,7 @@ PIN_METHOD_MAPPING = {
     1: "display_soccer_table2()",
     2: "display_current_weather()",
     3: "display_current_solar()",
-    4: None,
+    4: "display_current_time()",
     5: None,
     6: None,
     7: None,
@@ -81,6 +81,18 @@ def display_current_solar():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentSolar")
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
+        timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
+
+
+def display_current_time():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/currentTime")
     if not TIMER_RUNNING:
         timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()

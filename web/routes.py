@@ -51,3 +51,9 @@ def show_current_weather():
 def show_current_solar():
     data = current_solar.get_solar_data()  # a dictionary of weather data
     return dict(solar=data)
+
+
+@route('/currentTime')
+@view('current_time')
+def show_current_time():
+    return None
