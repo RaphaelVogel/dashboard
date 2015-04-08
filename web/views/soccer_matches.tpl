@@ -11,7 +11,7 @@
     <title>Aktuelle Spiele der {{liga}}. Bundesliga</title>
   </head>
   <body class="container">
-    <div class="col-lg-10">
+    <div class="col-lg-12">
       <table class="table table-striped">
         <thead>
           <tr>
