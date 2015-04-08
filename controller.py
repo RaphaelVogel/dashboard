@@ -15,8 +15,8 @@ PIN_METHOD_MAPPING = {
     2: "display_current_weather()",
     3: "display_current_solar()",
     4: "display_current_time()",
-    5: None,
-    6: None,
+    5: "display_soccer_matches1()",
+    6: "display_soccer_matches2()",
     7: None,
     8: None,
     9: None,
@@ -29,7 +29,7 @@ MAX_EVENT_WAIT_SECONDS = 0.6
 EVENT_WAIT_SLEEP_SECONDS = 0.1
 
 TIMER_RUNNING = False
-TIMER_START = 120.0
+TIMER_START = 180.0
 
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
@@ -57,6 +57,30 @@ def display_soccer_table2():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
+        timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
+
+
+def display_soccer_matches1():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/soccerMatches/1")
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
+        timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
+
+
+def display_soccer_matches2():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/soccerMatches/2")
     if not TIMER_RUNNING:
         timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()

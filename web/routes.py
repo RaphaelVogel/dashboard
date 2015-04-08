@@ -57,3 +57,10 @@ def show_current_solar():
 @view('current_time')
 def show_current_time():
     return None
+
+
+@route('/soccerMatches/<liga>')
+@view('soccer_matches')
+def show_soccer_matches(liga):
+    data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
+    return dict(liga=liga, matches=data)

@@ -51,3 +51,48 @@ def get_table_data(liga):
         return_table.append(club)
 
     return return_table
+
+
+def get_match_data(liga):
+    if liga == "1":
+        resp = requests.get(SOCCER_1_URL)
+    else:
+        resp = requests.get(SOCCER_2_URL)
+    if resp.status_code != 200:
+        return "ERROR: Cannot connect to soccer url"
+
+    soup = BeautifulSoup(resp.text)
+    tables = soup.find_all("table")
+    # table[0] is 'Aktueller Spieltag', table[1] is 'Tabelle'
+    return_table = []
+    for tr in tables[0].tbody.children:
+        if isinstance(tr, NavigableString):
+            continue
+        match = OrderedDict()
+        idx = 1
+        for td in tr.children:
+            if isinstance(td, NavigableString):
+                continue
+            if idx == 1:
+                date_string = ""
+                for date_part in td.contents:
+                    if not isinstance(date_part, NavigableString):
+                        continue
+                    date_string += date_part + " "
+                match['date'] = date_string
+            elif idx == 2:
+                match['home_team'] = td.a.string
+            elif idx == 3:
+                match['home_image'] = td.img['src']
+            elif idx == 4:
+                match['result'] = td.a.string
+            elif idx == 5:
+                match['guest_image'] = td.img['src']
+            elif idx == 6:
+                match['guest_team'] = td.a.string
+
+            idx += 1
+
+        return_table.append(match)
+
+    return return_table
