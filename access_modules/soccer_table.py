@@ -75,10 +75,10 @@ def get_match_data(liga):
                 continue
             if idx == 1:
                 date_string = ""
-                for date_part in td.contents:
-                    if not isinstance(date_part, NavigableString):
+                for child in td.descendants:
+                    if not isinstance(child, NavigableString):
                         continue
-                    date_string += date_part + " "
+                    date_string += child.string + " "
                 match['date'] = date_string
             elif idx == 2:
                 match['home_team'] = td.a.string
