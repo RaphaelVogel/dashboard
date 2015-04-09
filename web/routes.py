@@ -49,7 +49,7 @@ def show_current_weather():
 @route('/currentSolar')
 @view('current_solar')
 def show_current_solar():
-    data = current_solar.get_solar_data()  # a dictionary of weather data
+    data = current_solar.get_solar_data()  # a dictionary of solar data
     return dict(solar=data)
 
 
