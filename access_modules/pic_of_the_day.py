@@ -5,7 +5,7 @@ PIC_OF_DAY_URL = "http://www.spiegel.de/fotostrecke/augenblicke-bilder-des-tages
 
 
 def get_pic_url():
-    resp = requests.get(PIC_OF_DAY_URL, proxies={'http': 'http://proxy:8080'})
+    resp = requests.get(PIC_OF_DAY_URL)
     if resp.status_code != 200:
         return "ERROR: Cannot connect to picture of the day url"
 
