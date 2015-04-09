@@ -13,7 +13,7 @@
    <body class="container">
    <div class="col-lg-12">
      <img src="{{data['url']}}" width="100%" >
-     <p>{{data['text']}}</p>
+     <p style="font-weight:bold;">{{data['text']}}</p>
    </div>
   </body>
 </html>

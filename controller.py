@@ -39,6 +39,13 @@ def turn_monitor_off():
     TIMER_RUNNING = False
 
 
+def start_timer():
+    timer = Timer(TIMER_START, turn_monitor_off)
+    timer.start()
+    global TIMER_RUNNING
+    TIMER_RUNNING = True
+
+
 # --- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
     status = monitor.status()
@@ -46,10 +53,7 @@ def display_soccer_table1():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_soccer_table2():
@@ -58,10 +62,7 @@ def display_soccer_table2():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_soccer_matches1():
@@ -70,10 +71,7 @@ def display_soccer_matches1():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerMatches/1")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_soccer_matches2():
@@ -82,10 +80,7 @@ def display_soccer_matches2():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerMatches/2")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_current_weather():
@@ -94,10 +89,7 @@ def display_current_weather():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentWeather")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_current_solar():
@@ -106,10 +98,7 @@ def display_current_solar():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentSolar")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_current_time():
@@ -118,10 +107,7 @@ def display_current_time():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentTime")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 def display_pic_of_the_day():
@@ -130,10 +116,7 @@ def display_pic_of_the_day():
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/picOfTheDay")
     if not TIMER_RUNNING:
-        timer = Timer(TIMER_START, turn_monitor_off)
-        timer.start()
-        global TIMER_RUNNING
-        TIMER_RUNNING = True
+        start_timer()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
