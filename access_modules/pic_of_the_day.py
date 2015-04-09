@@ -15,9 +15,9 @@ def get_pic_url():
     for meta_tag in meta_tags:
         if isinstance(meta_tag, NavigableString):
             continue
-        if meta_tag.has_key('property') and meta_tag['property'] == "og:image":
+        if meta_tag.get('property') and meta_tag['property'] == "og:image":
             return_data['url'] = meta_tag['content']
-        if meta_tag.has_key('property') and meta_tag['property'] == "og:description":
+        if meta_tag.get('property') and meta_tag['property'] == "og:description":
             return_data['text'] = meta_tag['content']
 
     return return_data
