@@ -17,7 +17,7 @@ PIN_METHOD_MAPPING = {
     4: "display_current_time()",
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
-    7: None,
+    7: "display_pic_of_the_day()",
     8: None,
     9: None,
     10: None,
@@ -29,7 +29,7 @@ MAX_EVENT_WAIT_SECONDS = 0.6
 EVENT_WAIT_SLEEP_SECONDS = 0.1
 
 TIMER_RUNNING = False
-TIMER_START = 180.0
+TIMER_START = 300.0
 
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
@@ -117,6 +117,18 @@ def display_current_time():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentTime")
+    if not TIMER_RUNNING:
+        timer = Timer(TIMER_START, turn_monitor_off)
+        timer.start()
+        global TIMER_RUNNING
+        TIMER_RUNNING = True
+
+
+def display_pic_of_the_day():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/picOfTheDay")
     if not TIMER_RUNNING:
         timer = Timer(TIMER_START, turn_monitor_off)
         timer.start()

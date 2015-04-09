@@ -1,5 +1,5 @@
 from bottle import route, static_file, request, HTTPResponse, view
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -64,3 +64,10 @@ def show_current_time():
 def show_soccer_matches(liga):
     data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
     return dict(liga=liga, matches=data)
+
+
+@route('/picOfTheDay')
+@view('pic_of_the_day')
+def show_pic_of_the_day():
+    ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
+    return dict(data=ret_data)
