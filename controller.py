@@ -18,7 +18,7 @@ PIN_METHOD_MAPPING = {
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
     7: "display_pic_of_the_day()",
-    8: None,
+    8: "display_ebay()",
     9: None,
     10: None,
     11: None,
@@ -115,6 +115,15 @@ def display_pic_of_the_day():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/picOfTheDay")
+    if not TIMER_RUNNING:
+        start_timer()
+
+
+def display_ebay():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/ebay")
     if not TIMER_RUNNING:
         start_timer()
 

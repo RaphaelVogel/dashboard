@@ -1,5 +1,5 @@
 from bottle import route, static_file, request, HTTPResponse, view
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, ebay
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -71,3 +71,10 @@ def show_soccer_matches(liga):
 def show_pic_of_the_day():
     ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
     return dict(data=ret_data)
+
+
+@route('/ebay')
+@view('ebay')
+def show_ebay():
+    ret_data = ebay.get_data()  # returns a list of dictionaries
+    return dict(offers=ret_data)

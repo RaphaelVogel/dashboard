@@ -17,7 +17,7 @@ def get_pic_url():
             continue
         if meta_tag.get('property') and meta_tag['property'] == "og:image":
             return_data['url'] = meta_tag['content']
-        if meta_tag.get('property') and meta_tag['property'] == "og:description":
+        elif meta_tag.get('property') and meta_tag['property'] == "og:description":
             return_data['text'] = meta_tag['content']
 
     return return_data

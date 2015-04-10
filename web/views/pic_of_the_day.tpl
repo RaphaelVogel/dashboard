@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <style type="text/css">
-      body { font-size: 15px !important; }
+      body {color: white !important; font-size: 15px !important; background-color: black !important;}
     </style>
     <title>Bild des Tages</title>
   </head>
