@@ -1,4 +1,4 @@
-from bottle import route, static_file, request, HTTPResponse, view
+from bottle import route, static_file, request, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, ebay
 
 
@@ -47,10 +47,12 @@ def show_current_weather():
 
 
 @route('/currentSolar')
-@view('current_solar')
 def show_current_solar():
     data = current_solar.get_solar_data()  # a dictionary of solar data
-    return dict(solar=data)
+    if data:
+        return template('current_solar', solar=data)
+    else:
+        return template('error_solar')
 
 
 @route('/currentTime')
