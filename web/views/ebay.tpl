@@ -9,7 +9,7 @@
       body {color: white !important; font-size: 14px !important; background-color: black !important;}
     </style>
     <style type="text/css">
-      body { font-size: 15px !important;}
+      body { font-size: 14px !important;}
     </style>
     <title>Ebay in Meckesheim</title>
   </head>
