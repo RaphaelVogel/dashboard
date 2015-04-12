@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/lib/bootstrap.min.css">
     <style type="text/css">
+      body {color: white !important; font-size: 14px !important; background-color: black !important;}
+    </style>
+    <style type="text/css">
       body { font-size: 14px !important;}
     </style>
     <title>Ebay in Meckesheim</title>
