@@ -27,6 +27,9 @@ def switch_monitor(status):
 
 @route('/setURL/<url>')
 def set_url(url):
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
     iceweasel.open_url(url)
     return dict(status="OK")
 
