@@ -15,8 +15,11 @@ def get_data():
     for section in sections:
         if isinstance(section, NavigableString):
             continue
-        if section.get('class') and section['class'][0] == "ad-listitem-image" and section.a.get('data-imgsrc'):
-            entry = {'image_url': section.a['data-imgsrc']}
+        if section.get('class') and section['class'][0] == "ad-listitem-image":
+            if section.a.get('data-imgsrc'):
+                entry = {'image_url': section.a['data-imgsrc']}
+            else:
+                entry = {'image_url': '/lib/images/nopic.png'}
         elif section.get('class') and section['class'][0] == "ad-listitem-main":
             entry['text'] = section.h2.a.string
         elif section.get('class') and section['class'][0] == "ad-listitem-details":
