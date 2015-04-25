@@ -25,8 +25,7 @@ PIN_METHOD_MAPPING = {
 }
 
 IRQ_PIN = 26
-MAX_EVENT_WAIT_SECONDS = 0.6
-EVENT_WAIT_SLEEP_SECONDS = 0.1
+EVENT_WAIT_SLEEP_SECONDS = 0.15
 
 TIMER_RUNNING = False
 TIMER_START = 300.0
@@ -147,10 +146,8 @@ def setup_touch_loop():
     cap.touched()
 
     while True:
-        # Wait for the IRQ pin to drop or too much time ellapses (to help prevent
-        # missing an IRQ event and waiting forever).
-        start = time.time()
-        while (time.time() - start) < MAX_EVENT_WAIT_SECONDS and not GPIO.event_detected(IRQ_PIN):
+        # Wait for the IRQ pin to drop
+        while not GPIO.event_detected(IRQ_PIN):
             time.sleep(EVENT_WAIT_SLEEP_SECONDS)
         # Read touch state.
         touched = cap.touched()
