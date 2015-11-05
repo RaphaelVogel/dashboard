@@ -25,12 +25,26 @@ def switch_monitor(status):
     return dict(status="OK")
 
 
+# --- Non Button routes
 @route('/setURL/<url>')
 def set_url(url):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url(url)
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+    return dict(status="OK")
+
+
+@route('/darth')
+@view('darth_vader')
+def show_darth():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
     return dict(status="OK")
 
 

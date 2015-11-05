@@ -3,7 +3,6 @@ from access_modules import iceweasel, monitor
 import sys
 import time
 import atexit
-from threading import Timer
 
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
@@ -27,23 +26,6 @@ PIN_METHOD_MAPPING = {
 IRQ_PIN = 26
 EVENT_WAIT_SLEEP_SECONDS = 0.15
 
-TIMER_RUNNING = False
-TIMER_START = 300.0
-
-
-# --- Start thread to turn off monitor ------------------------------------------------------------------------------
-def turn_monitor_off():
-    monitor.switch_off()
-    global TIMER_RUNNING
-    TIMER_RUNNING = False
-
-
-def start_timer():
-    timer = Timer(TIMER_START, turn_monitor_off)
-    timer.start()
-    global TIMER_RUNNING
-    TIMER_RUNNING = True
-
 
 # --- Define functions to call if button is touched ------------------------------------------------------------------
 def display_soccer_table1():
@@ -51,8 +33,8 @@ def display_soccer_table1():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/1")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_soccer_table2():
@@ -60,8 +42,8 @@ def display_soccer_table2():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerTable/2")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_soccer_matches1():
@@ -69,8 +51,8 @@ def display_soccer_matches1():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerMatches/1")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_soccer_matches2():
@@ -78,8 +60,8 @@ def display_soccer_matches2():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/soccerMatches/2")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_current_weather():
@@ -87,8 +69,8 @@ def display_current_weather():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentWeather")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_current_solar():
@@ -96,8 +78,8 @@ def display_current_solar():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentSolar")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_current_time():
@@ -105,8 +87,8 @@ def display_current_time():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/currentTime")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_pic_of_the_day():
@@ -114,8 +96,8 @@ def display_pic_of_the_day():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/picOfTheDay")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def display_ebay():
@@ -123,8 +105,8 @@ def display_ebay():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("localhost:8080/ebay")
-    if not TIMER_RUNNING:
-        start_timer()
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
