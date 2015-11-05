@@ -25,7 +25,7 @@ def switch_monitor(status):
     return dict(status="OK")
 
 
-# --- Non Button routes
+# --- Non Button / public routes ---------------------------------------------------------------------------------------
 @route('/setURL/<url>')
 def set_url(url):
     status = monitor.status()
@@ -38,17 +38,17 @@ def set_url(url):
 
 
 @route('/darth')
-@view('darth_vader')
 def show_darth():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
+    iceweasel.open_url("localhost:8080/darthVader")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
-    return None
+    return dict(status="OK")
 
 
-# --- Button pressed routes ------------------------------------------------------------------------------------------
+# --- Button pressed routes / private routes ---------------------------------------------------------------------------
 @route('/soccerTable/<liga>')
 @view('soccer_ranking')
 def show_soccer_table(liga):
@@ -75,6 +75,12 @@ def show_current_solar():
 @route('/currentTime')
 @view('current_time')
 def show_current_time():
+    return None
+
+
+@route('/darthVader')
+@view('darth_vader')
+def show_darth_vader():
     return None
 
 
