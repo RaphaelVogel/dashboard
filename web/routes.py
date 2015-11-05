@@ -45,7 +45,7 @@ def show_darth():
         monitor.switch_on()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
-    return dict(status="OK")
+    return None
 
 
 # --- Button pressed routes ------------------------------------------------------------------------------------------
