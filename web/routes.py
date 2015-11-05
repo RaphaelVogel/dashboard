@@ -82,7 +82,7 @@ def show_current_time():
 @route('/starWars')
 @view('star_wars')
 def show_star_wars():
-    pic_list = ["darth_vader.jpg","master_yoda.jpg"]
+    pic_list = ["darth_vader.jpg"]
     return dict(pic_url="/lib/images/" + random.choice(pic_list))
 
 
