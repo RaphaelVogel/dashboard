@@ -1,5 +1,5 @@
 from bottle import route, static_file, request, HTTPResponse, view, template
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, ebay
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
