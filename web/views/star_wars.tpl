@@ -12,7 +12,7 @@
   </head>
    <body class="container">
    <div class="col-lg-12">
-     <img src="/lib/images/darth_vader.jpg" width="100%" >
+     <img src="{{pic_url}}" width="100%" >
    </div>
   </body>
 </html>

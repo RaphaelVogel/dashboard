@@ -17,7 +17,7 @@ PIN_METHOD_MAPPING = {
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
     7: "display_pic_of_the_day()",
-    8: "display_darth()",
+    8: "display_starwars()",
     9: None,
     10: None,
     11: None,
@@ -100,11 +100,11 @@ def display_pic_of_the_day():
         monitor.start_timer()
 
 
-def display_darth():
+def display_starwars():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/darthVader")
+    iceweasel.open_url("localhost:8080/starWars")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 

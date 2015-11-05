@@ -1,5 +1,6 @@
 from bottle import route, static_file, request, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
+import random
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -37,12 +38,12 @@ def set_url(url):
     return dict(status="OK")
 
 
-@route('/darth')
+@route('/starwars')
 def show_darth():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/darthVader")
+    iceweasel.open_url("localhost:8080/starWars")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -78,10 +79,11 @@ def show_current_time():
     return None
 
 
-@route('/darthVader')
-@view('darth_vader')
-def show_darth_vader():
-    return None
+@route('/starWars')
+@view('star_wars')
+def show_star_wars():
+    pic_list = ["darth_vader.jpg","master_yoda.jpg", "obi_wan.jpg", "darth_maul.jpg"]
+    return dict(pic_url="/lib/images/" + random.choice(pic_list))
 
 
 @route('/soccerMatches/<liga>')
