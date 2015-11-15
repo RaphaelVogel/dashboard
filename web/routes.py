@@ -83,7 +83,6 @@ def show_current_time():
 @route('/starWars')
 @view('star_wars')
 def show_star_wars():
-    resp = requests.get('http://192.168.1.15:8080/playsound/breath')
     pic_list = ["darth_vader.jpg"]
     return dict(pic_url="/lib/images/" + random.choice(pic_list))
 
