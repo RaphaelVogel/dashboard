@@ -32,7 +32,7 @@ def display_soccer_table1():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerTable/1")
+    iceweasel.open_url("localhost:8080/i_soccerTable/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -41,7 +41,7 @@ def display_soccer_table2():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerTable/2")
+    iceweasel.open_url("localhost:8080/i_soccerTable/2")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -50,7 +50,7 @@ def display_soccer_matches1():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerMatches/1")
+    iceweasel.open_url("localhost:8080/i_soccerMatches/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -59,7 +59,7 @@ def display_soccer_matches2():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/soccerMatches/2")
+    iceweasel.open_url("localhost:8080/i_soccerMatches/2")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -68,7 +68,7 @@ def display_current_weather():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/currentWeather")
+    iceweasel.open_url("localhost:8080/i_currentWeather")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -77,7 +77,7 @@ def display_current_solar():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/currentSolar")
+    iceweasel.open_url("localhost:8080/i_currentSolar")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -86,7 +86,7 @@ def display_current_time():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/currentTime")
+    iceweasel.open_url("localhost:8080/i_currentTime")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -95,7 +95,7 @@ def display_pic_of_the_day():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/picOfTheDay")
+    iceweasel.open_url("localhost:8080/i_picOfTheDay")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -104,7 +104,7 @@ def display_starwars():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/starWars")
+    iceweasel.open_url("localhost:8080/i_starWars")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
