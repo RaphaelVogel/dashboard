@@ -1,7 +1,6 @@
-from bottle import route, static_file, request, HTTPResponse, view, template
+from bottle import route, static_file, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
 import random
-import requests
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
