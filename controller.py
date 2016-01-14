@@ -20,7 +20,7 @@ PIN_METHOD_MAPPING = {
     8: "display_starwars()",
     9: None,
     10: None,
-    11: None,
+    11: "start_speech_recognition()"
 }
 
 IRQ_PIN = 26
@@ -109,6 +109,15 @@ def display_starwars():
         monitor.start_timer()
 
 
+def start_speech_recognition():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_speechRecognition")
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+
+
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
 def setup_touch_loop():
     cap = MPR121.MPR121()
@@ -133,7 +142,7 @@ def setup_touch_loop():
             time.sleep(EVENT_WAIT_SLEEP_SECONDS)
         # Read touch state.
         touched = cap.touched()
-        # Check which ey presses for any touched keys.
+        # Check which key presses for any touched keys.
         for pin, function_to_call in PIN_METHOD_MAPPING.iteritems():
             pin_bit = 1 << pin
             if touched & pin_bit:

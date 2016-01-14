@@ -1,5 +1,6 @@
 from bottle import route, static_file, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
+from access_modules import speech_recognition
 import random
 
 
@@ -164,3 +165,10 @@ def i_show_soccer_matches(liga):
 def i_show_pic_of_the_day():
     ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
     return dict(data=ret_data)
+
+
+@route('/i_speechRecognition')
+@view('speech_recognition')
+def i_speech_recognition():
+    speech_recognition.start_speech_recognition()
+    return dict(pic_url="/lib/images/speech_recognition.jpg")
