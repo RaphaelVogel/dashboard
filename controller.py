@@ -176,7 +176,7 @@ def setup_touch_loop():
 def evaluate_pressing_time(function_to_call, cap):
     presstime = 0
     split_function = function_to_call.split('|')
-    for i in range(30):
+    while True:
         if cap.is_touched(8) or cap.is_touched(9):
             presstime += 1
         else:
