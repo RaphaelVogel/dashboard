@@ -10,7 +10,7 @@ import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
 
 logger = logging.getLogger("controller_logger")
-logger.setLevel(logging.WARN)
+logger.setLevel(logging.INFO)
 filehandler = RotatingFileHandler('./dashboard/log_controller.txt', maxBytes=100000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
 filehandler.setFormatter(formatter)
@@ -181,8 +181,10 @@ def evaluate_pressing_time(function_to_call, cap):
             presstime += 1
         else:
             if presstime < 15:
+                logger.info("Returned function: %s", split_function[0])
                 return split_function[0]
             else:
+                logger.info("Returned function: %s", split_function[1])
                 return split_function[1]
 
         time.sleep(0.1)
