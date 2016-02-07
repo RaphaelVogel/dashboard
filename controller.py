@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from access_modules import iceweasel, monitor
+from access_modules import iceweasel, monitor, web_radio, speech_recognition
 import sys
 import time
 import atexit
@@ -114,7 +114,7 @@ def play_radio():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_playRadio")
+    web_radio.play_radio()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -123,7 +123,7 @@ def stop_radio():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_stopRadio")
+    web_radio.stop_radio()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -132,7 +132,7 @@ def increase_volume():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_increaseVolume")
+    web_radio.increase_volume()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -141,7 +141,7 @@ def decrease_volume():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_decreaseVolume")
+    web_radio.decrease_volume()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -150,7 +150,7 @@ def start_speech_recognition():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_speechRecognition")
+    speech_recognition.start_speech_recognition()
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 

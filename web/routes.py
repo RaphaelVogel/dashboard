@@ -146,46 +146,6 @@ def i_show_current_time():
     return None
 
 
-@route('/i_playRadio')
-@view('speech_recognition')
-def i_play_radio():
-    try:
-        web_radio.play_radio()
-        return dict(pic_url="/lib/images/speech_recognition.jpg")
-    except Exception as e:
-        logger.error(str(e))
-
-
-@route('/i_stopRadio')
-@view('speech_recognition')
-def i_stop_radio():
-    try:
-        web_radio.stop_radio()
-        return dict(pic_url="/lib/images/speech_recognition.jpg")
-    except Exception as e:
-        logger.error(str(e))
-
-
-@route('/i_increaseVolume')
-@view('speech_recognition')
-def i_increase_volume():
-    try:
-        web_radio.increase_volume()
-        return dict(pic_url="/lib/images/speech_recognition.jpg")
-    except Exception as e:
-        logger.error(str(e))
-
-
-@route('/i_decreaseVolume')
-@view('speech_recognition')
-def i_decrease_volume():
-    try:
-        web_radio.decrease_volume()
-        return dict(pic_url="/lib/images/speech_recognition.jpg")
-    except Exception as e:
-        logger.error(str(e))
-
-
 @route('/i_soccerMatches/<liga>')
 @view('soccer_matches')
 def i_show_soccer_matches(liga):
@@ -202,15 +162,5 @@ def i_show_pic_of_the_day():
     try:
         ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
         return dict(data=ret_data)
-    except Exception as e:
-        logger.error(str(e))
-
-
-@route('/i_speechRecognition')
-@view('speech_recognition')
-def i_speech_recognition():
-    try:
-        speech_recognition.start_speech_recognition()
-        return dict(pic_url="/lib/images/speech_recognition.jpg")
     except Exception as e:
         logger.error(str(e))
