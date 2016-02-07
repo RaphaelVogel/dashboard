@@ -6,7 +6,7 @@ from bottle import run, TEMPLATE_PATH
 import web.routes 
 
 # logger configuration
-logger = logging.getLogger("dash_logger")
+logger = logging.getLogger("server_logger")
 logger.setLevel(logging.WARN)
 filehandler = RotatingFileHandler('./dashboard/log_server.txt', maxBytes=100000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')

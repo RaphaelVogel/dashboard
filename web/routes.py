@@ -1,6 +1,9 @@
 from bottle import route, static_file, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
 from access_modules import speech_recognition, web_radio
+import logging
+
+logger = logging.getLogger("server_logger")
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -108,24 +111,33 @@ def show_pic_of_the_day():
 @route('/i_soccerTable/<liga>')
 @view('soccer_ranking')
 def i_show_soccer_table(liga):
-    data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
-    return dict(liga=liga, table=data)
+    try:
+        data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
+        return dict(liga=liga, table=data)
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_currentWeather')
 @view('current_weather')
 def i_show_current_weather():
-    data = current_weather.get_weather_data()  # a dictionary of weather data
-    return dict(weather=data)
+    try:
+        data = current_weather.get_weather_data()  # a dictionary of weather data
+        return dict(weather=data)
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_currentSolar')
 def i_show_current_solar():
-    data = current_solar.get_solar_data()  # a dictionary of solar data
-    if data:
-        return template('current_solar', solar=data)
-    else:
-        return template('error_solar')
+    try:
+        data = current_solar.get_solar_data()  # a dictionary of solar data
+        if data:
+            return template('current_solar', solar=data)
+        else:
+            return template('error_solar')
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_currentTime')
@@ -137,47 +149,68 @@ def i_show_current_time():
 @route('/i_playRadio')
 @view('speech_recognition')
 def i_play_radio():
-    web_radio.play_radio()
-    return dict(pic_url="/lib/images/speech_recognition.jpg")
+    try:
+        web_radio.play_radio()
+        return dict(pic_url="/lib/images/speech_recognition.jpg")
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_stopRadio')
 @view('speech_recognition')
 def i_stop_radio():
-    web_radio.stop_radio()
-    return dict(pic_url="/lib/images/speech_recognition.jpg")
+    try:
+        web_radio.stop_radio()
+        return dict(pic_url="/lib/images/speech_recognition.jpg")
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_increaseVolume')
 @view('speech_recognition')
 def i_increase_volume():
-    web_radio.increase_volume()
-    return dict(pic_url="/lib/images/speech_recognition.jpg")
+    try:
+        web_radio.increase_volume()
+        return dict(pic_url="/lib/images/speech_recognition.jpg")
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_decreaseVolume')
 @view('speech_recognition')
 def i_decrease_volume():
-    web_radio.decrease_volume()
-    return dict(pic_url="/lib/images/speech_recognition.jpg")
+    try:
+        web_radio.decrease_volume()
+        return dict(pic_url="/lib/images/speech_recognition.jpg")
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_soccerMatches/<liga>')
 @view('soccer_matches')
 def i_show_soccer_matches(liga):
-    data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
-    return dict(liga=liga, matches=data)
+    try:
+        data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
+        return dict(liga=liga, matches=data)
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_picOfTheDay')
 @view('pic_of_the_day')
 def i_show_pic_of_the_day():
-    ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
-    return dict(data=ret_data)
+    try:
+        ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
+        return dict(data=ret_data)
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_speechRecognition')
 @view('speech_recognition')
 def i_speech_recognition():
-    speech_recognition.start_speech_recognition()
-    return dict(pic_url="/lib/images/speech_recognition.jpg")
+    try:
+        speech_recognition.start_speech_recognition()
+        return dict(pic_url="/lib/images/speech_recognition.jpg")
+    except Exception as e:
+        logger.error(str(e))
