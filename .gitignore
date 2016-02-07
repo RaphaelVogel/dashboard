@@ -7,4 +7,9 @@ __init__.pyc
 *.pyc
 update.yml
 host
+log_controller.txt
+log_server.txt
+web/.DS_Store
+web/lib/.DS_Store
+web/lib/images/.DS_Store
 
