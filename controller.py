@@ -3,9 +3,13 @@ from access_modules import iceweasel, monitor
 import sys
 import time
 import atexit
+import logging
 
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
+
+logger = logging.getLogger("dash_logger")
+
 
 # Define mapping of capacitive touch pin to method calls
 PIN_METHOD_MAPPING = {
@@ -166,7 +170,7 @@ def evaluate_pressing_time(function_to_call, cap):
     presstime = 0
     split_function = function_to_call.split('|')
     for i in range(30):
-        if cap.touched:
+        if cap.is_touched(8):
             presstime += 1
         else:
             if presstime < 20:
