@@ -111,39 +111,19 @@ def display_pic_of_the_day():
 
 
 def play_radio():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
     web_radio.play_radio()
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
 
 
 def stop_radio():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
     web_radio.stop_radio()
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
 
 
 def increase_volume():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
     web_radio.increase_volume()
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
 
 
 def decrease_volume():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
     web_radio.decrease_volume()
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
 
 
 def start_speech_recognition():
