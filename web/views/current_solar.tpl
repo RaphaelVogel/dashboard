@@ -47,7 +47,7 @@
                 {{solar['month']}} {{solar['month_unit']}}</span></h1>
             <h1 class="text-success">Jahr<span class="right">
                 {{solar['year']}} {{solar['year_unit']}}</span></h1>
-            <h1 class="text-success">Gesammt<span class="right">
+            <h1 class="text-success">Gesamt<span class="right">
                 {{solar['total']}} {{solar['total_unit']}}</span></h1>
         </div>
     </div>

@@ -1,7 +1,6 @@
 from bottle import route, static_file, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
-from access_modules import speech_recognition
-import random
+from access_modules import speech_recognition, web_radio
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -146,11 +145,18 @@ def i_show_current_time():
     return None
 
 
-@route('/i_starWars')
-@view('star_wars')
-def i_show_star_wars():
-    pic_list = ["darth_vader.jpg"]
-    return dict(pic_url="/lib/images/" + random.choice(pic_list))
+@route('/i_playRadio')
+@view('speech_recognition')
+def i_play_radio():
+    web_radio.start_radio()
+    return dict(pic_url="/lib/images/speech_recognition.jpg")
+
+
+@route('/i_stopRadio')
+@view('speech_recognition')
+def i_stop_radio():
+    web_radio.stop_radio()
+    return dict(pic_url="/lib/images/speech_recognition.jpg")
 
 
 @route('/i_soccerMatches/<liga>')

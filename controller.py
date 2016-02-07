@@ -17,7 +17,7 @@ PIN_METHOD_MAPPING = {
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
     7: "display_pic_of_the_day()",
-    8: "display_starwars()",
+    8: "play_radio()|stop_radio()",
     9: None,
     10: None,
     11: "start_speech_recognition()"
@@ -100,11 +100,20 @@ def display_pic_of_the_day():
         monitor.start_timer()
 
 
-def display_starwars():
+def play_radio():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_starWars")
+    iceweasel.open_url("localhost:8080/i_playRadio")
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+
+
+def stop_radio():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_stopRadio")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -147,7 +156,25 @@ def setup_touch_loop():
             pin_bit = 1 << pin
             if touched & pin_bit:
                 if function_to_call:
+                    if pin_bit == 8:
+                        function_to_call = evaluate_pressing_time(function_to_call, cap)
+
                     eval(function_to_call)
+
+
+def evaluate_pressing_time(function_to_call, cap):
+    presstime = 0
+    split_function = function_to_call.split('|')
+    for i in range(30):
+        if cap.touched:
+            presstime += 1
+        else:
+            if presstime < 20:
+                return split_function[0]
+            else:
+                return split_function[1]
+
+        time.sleep(0.1)
 
 
 if __name__ == '__main__':
