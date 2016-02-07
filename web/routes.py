@@ -38,17 +38,6 @@ def set_url(url):
     return dict(status="OK")
 
 
-@route('/starWars')
-def show_starwars():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_starWars")
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
-    return dict(status="OK")
-
-
 @route('/soccerTable/<liga>')
 def show_soccer_table(liga):
     status = monitor.status()
@@ -148,7 +137,7 @@ def i_show_current_time():
 @route('/i_playRadio')
 @view('speech_recognition')
 def i_play_radio():
-    web_radio.start_radio()
+    web_radio.play_radio()
     return dict(pic_url="/lib/images/speech_recognition.jpg")
 
 
@@ -156,6 +145,20 @@ def i_play_radio():
 @view('speech_recognition')
 def i_stop_radio():
     web_radio.stop_radio()
+    return dict(pic_url="/lib/images/speech_recognition.jpg")
+
+
+@route('/i_increaseVolume')
+@view('speech_recognition')
+def i_increase_volume():
+    web_radio.increase_volume()
+    return dict(pic_url="/lib/images/speech_recognition.jpg")
+
+
+@route('/i_decreaseVolume')
+@view('speech_recognition')
+def i_decrease_volume():
+    web_radio.decrease_volume()
     return dict(pic_url="/lib/images/speech_recognition.jpg")
 
 
