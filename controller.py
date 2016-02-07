@@ -200,7 +200,7 @@ def evaluate_pressing_time(function_to_call, cap):
         if cap.is_touched(8) or cap.is_touched(9):
             presstime += 1
         else:
-            if presstime < 20:
+            if presstime < 15:
                 return split_function[0]
             else:
                 return split_function[1]
