@@ -4,11 +4,17 @@ import sys
 import time
 import atexit
 import logging
+from logging.handlers import RotatingFileHandler
 
 import Adafruit_MPR121.MPR121 as MPR121
 import RPi.GPIO as GPIO
 
 logger = logging.getLogger("dash_logger")
+logger.setLevel(logging.WARN)
+filehandler = RotatingFileHandler('./dashboard/log_controller.txt', maxBytes=100000, backupCount=3)
+formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
+filehandler.setFormatter(formatter)
+logger.addHandler(filehandler)
 
 
 # Define mapping of capacitive touch pin to method calls
@@ -160,10 +166,11 @@ def setup_touch_loop():
             pin_bit = 1 << pin
             if touched & pin_bit:
                 if function_to_call:
-                    if pin_bit == 8:
+                    if pin == 8:
                         function_to_call = evaluate_pressing_time(function_to_call, cap)
 
                     eval(function_to_call)
+                    break
 
 
 def evaluate_pressing_time(function_to_call, cap):
