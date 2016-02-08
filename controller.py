@@ -127,12 +127,7 @@ def decrease_volume():
 
 
 def start_speech_recognition():
-    status = monitor.status()
-    if status == "OFF":
-        monitor.switch_on()
     speech_recognition.start_speech_recognition()
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
@@ -180,7 +175,7 @@ def evaluate_pressing_time(function_to_call, cap):
         if cap.is_touched(8) or cap.is_touched(9):
             presstime += 1
         else:
-            if presstime < 15:
+            if presstime < 10:
                 logger.info("Returned function: %s", split_function[0])
                 return split_function[0]
             else:
