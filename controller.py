@@ -182,7 +182,7 @@ def evaluate_pressing_time(function_to_call, cap):
                 logger.info("Returned function: %s", split_function[1])
                 return split_function[1]
 
-        time.sleep(0.1)
+        time.sleep(0.15)
 
 
 if __name__ == '__main__':
