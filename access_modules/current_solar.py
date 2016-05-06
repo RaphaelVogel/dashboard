@@ -1,8 +1,13 @@
 import requests
+import ConfigParser
+
+config = ConfigParser.RawConfigParser()
+config.read('/home/pi/dashboard/tools/config.txt')
+base_url = config.get('base', 'url')
 
 
 def get_solar_data():
-    resp = requests.get('http://ha:8080/solar/current')
+    resp = requests.get(base_url + '/solar/current')
     if resp.status_code != 200:
         return None
     else:

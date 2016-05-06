@@ -30,7 +30,7 @@ PIN_METHOD_MAPPING = {
     8: "play_radio()|stop_radio()",
     9: "increase_volume()|decrease_volume()",
     10: None,
-    11: "start_speech_recognition()"
+    11: None
 }
 
 IRQ_PIN = 26
@@ -124,10 +124,6 @@ def increase_volume():
 
 def decrease_volume():
     web_radio.decrease_volume()
-
-
-def start_speech_recognition():
-    speech_recognition.start_speech_recognition()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------

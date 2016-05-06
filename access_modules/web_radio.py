@@ -1,17 +1,22 @@
 import requests
+import ConfigParser
+
+config = ConfigParser.RawConfigParser()
+config.read('/home/pi/dashboard/tools/config.txt')
+base_url = config.get('base', 'url')
 
 
 def play_radio():
-    requests.get('http://192.168.1.15:8080/playRadio')
+    requests.get(base_url + '/playRadio')
 
 
 def stop_radio():
-    requests.get('http://192.168.1.15:8080/stopRadio')
+    requests.get(base_url + '/stopRadio')
 
 
 def increase_volume():
-    requests.get('http://192.168.1.15:8080/increaseVolume')
+    requests.get(base_url + '/increaseVolume')
 
 
 def decrease_volume():
-    requests.get('http://192.168.1.15:8080/decreaseVolume')
+    requests.get(base_url + '/decreaseVolume')
