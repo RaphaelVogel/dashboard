@@ -171,7 +171,7 @@ def evaluate_pressing_time(function_to_call, cap):
         if cap.is_touched(8) or cap.is_touched(9):
             presstime += 1
         else:
-            if presstime < 10:
+            if presstime < 8:
                 logger.info("Returned function: %s", split_function[0])
                 return split_function[0]
             else:
