@@ -29,7 +29,7 @@ PIN_METHOD_MAPPING = {
     7: "display_pic_of_the_day()",
     8: "play_radio()|stop_radio()",
     9: "increase_volume()|decrease_volume()",
-    10: None,
+    10: "meckesheim_liga()",
     11: None
 }
 
@@ -124,6 +124,15 @@ def increase_volume():
 
 def decrease_volume():
     web_radio.decrease_volume()
+
+
+def meckesheim_liga():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("http://www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
