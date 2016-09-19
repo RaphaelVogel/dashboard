@@ -130,7 +130,7 @@ def meckesheim_liga():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("http://www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
+    iceweasel.open_url("www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
