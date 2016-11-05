@@ -8,9 +8,9 @@ SOCCER_2_URL = "http://www.dfb.de/2-bundesliga/spieltagtabelle/"
 
 def get_table_data(liga):
     if liga == "1":
-        resp = requests.get(SOCCER_1_URL)
+        resp = requests.get(SOCCER_1_URL, timeout=8)
     else:
-        resp = requests.get(SOCCER_2_URL)
+        resp = requests.get(SOCCER_2_URL, timeout=8)
     if resp.status_code != 200:
         return "ERROR: Cannot connect to soccer url"
 
@@ -55,9 +55,9 @@ def get_table_data(liga):
 
 def get_match_data(liga):
     if liga == "1":
-        resp = requests.get(SOCCER_1_URL)
+        resp = requests.get(SOCCER_1_URL, timeout=8)
     else:
-        resp = requests.get(SOCCER_2_URL)
+        resp = requests.get(SOCCER_2_URL, timeout=8)
     if resp.status_code != 200:
         return "ERROR: Cannot connect to soccer url"
 

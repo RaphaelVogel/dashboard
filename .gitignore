@@ -6,6 +6,7 @@ tools/config.txt
 __init__.pyc
 *.pyc
 update.yml
+update_all.yml
 host
 log_controller.txt
 log_server.txt

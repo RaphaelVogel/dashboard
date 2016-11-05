@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from access_modules import iceweasel, monitor, web_radio, speech_recognition
+from access_modules import iceweasel, monitor, web_radio
 import sys
 import time
 import atexit

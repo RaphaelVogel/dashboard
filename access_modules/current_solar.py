@@ -7,7 +7,7 @@ base_url = config.get('base', 'url')
 
 
 def get_solar_data():
-    resp = requests.get(base_url + '/solar/current')
+    resp = requests.get(base_url + '/solar/current', timeout=4)
     if resp.status_code != 200:
         return None
     else:

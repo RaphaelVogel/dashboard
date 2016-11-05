@@ -40,11 +40,11 @@
           </div>
           <div class="panel-body bg-info">
             <h1 class="text-primary">Temperatur <span class="right">
-                {{weather['temperature']}} {{weather['temperature_unit']}}</span></h1>
+                {{weather['temperature']}} Grad</span></h1>
             <h1 class="text-primary">Luftfeuchte<span class="right">
-                {{weather['humidity']}} {{weather['humidity_unit']}}</span></h1>
+                {{weather['humidity']}} %</span></h1>
             <h1 class="text-primary">Luftdruck<span class="right">
-                {{weather['pressure']}} {{weather['pressure_unit']}}</span></h1>
+                {{weather['pressure']}} mBar</span></h1>
         </div>
     </div>
   </body>
