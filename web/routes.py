@@ -1,6 +1,5 @@
 from bottle import route, static_file, HTTPResponse, view, template
 from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
-from access_modules import speech_recognition, web_radio
 import logging
 
 logger = logging.getLogger("server_logger")
@@ -17,7 +16,9 @@ def serve_static(filepath):
     return static_file(filepath, root='./dashboard/web/lib')
 
 
-# --- Public routes ---------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------
+# --- Public routes ---
+# ---------------------------------------------------------------------------------------------------------
 @route('/monitor/<status>')
 def switch_monitor(status):
     if status == "ON":
@@ -107,7 +108,20 @@ def show_pic_of_the_day():
     return dict(status="OK")
 
 
-# --- Button pressed routes / private routes ---------------------------------------------------------------------------
+@route('/alarmMessage/<a_type>/<a_location>')
+def alarm_message(a_type, a_location):
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_alarmMessage/" + a_type + "/" + a_location)
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+    return dict(status="OK")
+
+
+# ---------------------------------------------------------------------------------------------------------
+# --- Button pressed routes / private routes ---
+# ---------------------------------------------------------------------------------------------------------
 @route('/i_soccerTable/<liga>')
 @view('soccer_ranking')
 def i_show_soccer_table(liga):
@@ -162,5 +176,14 @@ def i_show_pic_of_the_day():
     try:
         ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
         return dict(data=ret_data)
+    except Exception as e:
+        logger.error(str(e))
+
+
+@route('/i_alarmMessage/<a_type>/<a_location>')
+@view('alarm_message')
+def i_alarm_message(a_type, a_location):
+    try:
+        return dict(alarm_type=a_type, alarm_location=a_location)
     except Exception as e:
         logger.error(str(e))
