@@ -34,7 +34,7 @@
   </head>
   <body style="background-color: red;">
     <div class="vertical-center">
-        <h1 style="font-size: 3.5em;">ALARM: {{alarm_type}} - {{alarm_location}}</h1>
+        <h1 style="font-size: 3.5em;">ALARM: {{sensor_type}} - {{alarm_location}}</h1>
     </div>
   </body>
 </html>

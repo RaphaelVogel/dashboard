@@ -108,12 +108,12 @@ def show_pic_of_the_day():
     return dict(status="OK")
 
 
-@route('/alarmMessage/<a_type>/<a_location>')
-def alarm_message(a_type, a_location):
+@route('/alarmMessage/<sensor_type>/<alarm_location>')
+def alarm_message(sensor_type, alarm_location):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_alarmMessage/" + a_type + "/" + a_location)
+    iceweasel.open_url("localhost:8080/i_alarmMessage/" + sensor_type + "/" + alarm_location)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -180,10 +180,10 @@ def i_show_pic_of_the_day():
         logger.error(str(e))
 
 
-@route('/i_alarmMessage/<a_type>/<a_location>')
+@route('/i_alarmMessage/<sensor_type>/<alarm_location>')
 @view('alarm_message')
-def i_alarm_message(a_type, a_location):
+def i_alarm_message(sensor_type, alarm_location):
     try:
-        return dict(alarm_type=a_type, alarm_location=a_location)
+        return dict(sensor_type=sensor_type, alarm_location=alarm_location)
     except Exception as e:
         logger.error(str(e))
