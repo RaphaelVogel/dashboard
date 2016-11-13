@@ -1,5 +1,5 @@
 from bottle import route, static_file, HTTPResponse, view, template
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus
 import logging
 
 logger = logging.getLogger("server_logger")
@@ -185,5 +185,17 @@ def i_show_pic_of_the_day():
 def i_alarm_message(sensor_type, alarm_location):
     try:
         return dict(sensor_type=sensor_type, alarm_location=alarm_location)
+    except Exception as e:
+        logger.error(str(e))
+
+
+@route('/i_alarm_status')
+@view('alarm_status')
+def i_alarm_status():
+    try:
+        alarm_logs = alarmstatus.get_alarm_logs()  # returns a dictionary with alarm log messages
+        message_list = alarm_logs['alarm_logs']
+        alarm_status = alarmstatus.get_alarm_status()
+        return dict(alarmlogs=message_list, alarmstatus=alarm_status['status'])
     except Exception as e:
         logger.error(str(e))

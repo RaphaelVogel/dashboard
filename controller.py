@@ -30,7 +30,7 @@ PIN_METHOD_MAPPING = {
     8: "play_radio()|stop_radio()",
     9: "increase_volume()|decrease_volume()",
     10: "meckesheim_liga()",
-    11: None
+    11: "alarm_status()"
 }
 
 IRQ_PIN = 26
@@ -131,6 +131,15 @@ def meckesheim_liga():
     if status == "OFF":
         monitor.switch_on()
     iceweasel.open_url("www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+
+
+def alarm_status():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_alarm_status")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
