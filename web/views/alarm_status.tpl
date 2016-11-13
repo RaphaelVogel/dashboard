@@ -28,7 +28,7 @@
       </table>
     </div>
     <div class="col-md-4">
-        <h3>Alarm Service {{alarmstatus}}</h3>
+        <h3>Alarmanlage {{alarmstatus}}</h3>
     </div>
   </body>
 </html>
