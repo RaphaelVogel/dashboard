@@ -4,6 +4,8 @@ import logging
 
 logger = logging.getLogger("server_logger")
 
+camera_name = ["Haustüre"]
+
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
@@ -176,6 +178,17 @@ def i_show_pic_of_the_day():
     try:
         ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
         return dict(data=ret_data)
+    except Exception as e:
+        logger.error(str(e))
+
+
+@route('/i_display_cameras')
+@view('display_cameras')
+def i_display_cameras():
+    global camera_name
+    try:
+        camera_data = {name: camera_name, url: "http://192.168.1.20/?action=stream"}
+        return dict(data=camera_data)
     except Exception as e:
         logger.error(str(e))
 

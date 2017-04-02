@@ -1,5 +1,5 @@
 #!/usr/bin/python
-from access_modules import iceweasel, monitor, web_radio
+from access_modules import iceweasel, monitor
 import sys
 import time
 import atexit
@@ -27,8 +27,8 @@ PIN_METHOD_MAPPING = {
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
     7: "display_pic_of_the_day()",
-    8: "play_radio()|stop_radio()",
-    9: "increase_volume()|decrease_volume()",
+    8: "display_cameras()",
+    9: "",
     10: "meckesheim_liga()",
     11: "alarm_status()"
 }
@@ -110,20 +110,13 @@ def display_pic_of_the_day():
         monitor.start_timer()
 
 
-def play_radio():
-    web_radio.play_radio()
-
-
-def stop_radio():
-    web_radio.stop_radio()
-
-
-def increase_volume():
-    web_radio.increase_volume()
-
-
-def decrease_volume():
-    web_radio.decrease_volume()
+def display_cameras():
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_display_cameras")
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
 
 
 def meckesheim_liga():
