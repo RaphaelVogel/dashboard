@@ -1,5 +1,5 @@
 from bottle import route, static_file, HTTPResponse, view, template
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus, camera_name
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus, camera
 import logging
 
 logger = logging.getLogger("server_logger")
@@ -184,7 +184,7 @@ def i_show_pic_of_the_day():
 @view('display_cameras')
 def i_display_cameras():
     try:
-        ret_data = camera_name.get_camera_data(1)
+        ret_data = camera.get_camera_data(1)
         return dict(data=ret_data)
     except Exception as e:
         logger.error(str(e))
