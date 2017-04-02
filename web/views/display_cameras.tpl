@@ -12,8 +12,8 @@
   </head>
    <body class="container">
    <div>
-     <h3>{{data['name']}}</h3>
-     <iframe src="{{data['url']}}"></iframe>
+     <h3>{{data['name']}}</>
+     <img src="{{data['url']}}" />
    </div>
   </body>
 </html>
