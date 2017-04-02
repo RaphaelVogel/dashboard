@@ -13,7 +13,7 @@
    <body class="container">
    <div>
      <h3>{{data['name']}}</h3>
-     <img src="{{data['url']}}" />
+     <iframe src="{{data['url']}}"></iframe>
    </div>
   </body>
 </html>
