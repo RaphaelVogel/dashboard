@@ -1,10 +1,8 @@
 from bottle import route, static_file, HTTPResponse, view, template
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus
+from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus, camera_name
 import logging
 
 logger = logging.getLogger("server_logger")
-
-camera_name = ["Haustüre"]
 
 
 # --- Base routes ----------------------------------------------------------------------------------------------------
@@ -185,10 +183,9 @@ def i_show_pic_of_the_day():
 @route('/i_display_cameras')
 @view('display_cameras')
 def i_display_cameras():
-    global camera_name
     try:
-        camera_data = {name: camera_name, url: "http://192.168.1.20/?action=stream"}
-        return dict(data=camera_data)
+        ret_data = camera_name.get_camera_data(1)
+        return dict(data=ret_data)
     except Exception as e:
         logger.error(str(e))
 
