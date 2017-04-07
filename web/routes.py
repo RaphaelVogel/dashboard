@@ -108,6 +108,17 @@ def show_pic_of_the_day():
     return dict(status="OK")
 
 
+@route('/displayCamera/<cam>')
+def display_camera(cam):
+    status = monitor.status()
+    if status == "OFF":
+        monitor.switch_on()
+    iceweasel.open_url("localhost:8080/i_display_camera/" + cam)
+    if not monitor.TIMER_RUNNING:
+        monitor.start_timer()
+    return dict(status="OK")
+
+
 @route('/alarmMessage/<sensor_type>/<alarm_location>')
 def alarm_message(sensor_type, alarm_location):
     status = monitor.status()
@@ -180,11 +191,11 @@ def i_show_pic_of_the_day():
         logger.error(str(e))
 
 
-@route('/i_display_cameras')
-@view('display_cameras')
-def i_display_cameras():
+@route('/i_display_camera/<cam>')
+@view('display_camera')
+def i_display_camera(cam):
     try:
-        ret_data = camera.get_camera_data(1)
+        ret_data = camera.get_camera_data(cam)
         return dict(data=ret_data)
     except Exception as e:
         logger.error(str(e))

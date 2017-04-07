@@ -27,7 +27,7 @@ PIN_METHOD_MAPPING = {
     5: "display_soccer_matches1()",
     6: "display_soccer_matches2()",
     7: "display_pic_of_the_day()",
-    8: "display_cameras()",
+    8: "display_camera()",
     9: "",
     10: "meckesheim_liga()",
     11: "alarm_status()"
@@ -110,11 +110,11 @@ def display_pic_of_the_day():
         monitor.start_timer()
 
 
-def display_cameras():
+def display_camera():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_display_cameras")
+    iceweasel.open_url("localhost:8080/i_display_camera/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
