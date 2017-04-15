@@ -3,7 +3,7 @@ import subprocess
 from threading import Timer
 
 TIMER_RUNNING = False
-TIMER_START = 300.0
+TIMER_START = 210.0
 
 
 def switch_off():
