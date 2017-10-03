@@ -1,5 +1,5 @@
 from bottle import route, static_file, HTTPResponse, view, template
-from access_modules import iceweasel, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus, camera
+from access_modules import chromium, monitor, soccer_table, current_weather, current_solar, pic_of_the_day, alarmstatus, camera
 import logging
 
 logger = logging.getLogger("server_logger")
@@ -36,7 +36,7 @@ def set_url(url):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url(url)
+    chromium.open_url(url)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -47,7 +47,7 @@ def show_soccer_table(liga):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerTable/" + liga)
+    chromium.open_url("localhost:8080/i_soccerTable/" + liga)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -58,7 +58,7 @@ def show_current_weather():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentWeather")
+    chromium.open_url("localhost:8080/i_currentWeather")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -69,7 +69,7 @@ def show_current_solar():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentSolar")
+    chromium.open_url("localhost:8080/i_currentSolar")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -80,7 +80,7 @@ def show_current_time():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentTime")
+    chromium.open_url("localhost:8080/i_currentTime")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -91,7 +91,7 @@ def show_soccer_matches(liga):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerMatches/" + liga)
+    chromium.open_url("localhost:8080/i_soccerMatches/" + liga)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -102,7 +102,7 @@ def show_pic_of_the_day():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_picOfTheDay")
+    chromium.open_url("localhost:8080/i_picOfTheDay")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -113,7 +113,7 @@ def display_camera(cam):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_display_camera/" + cam)
+    chromium.open_url("localhost:8080/i_display_camera/" + cam)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")
@@ -124,7 +124,7 @@ def alarm_message(sensor_type, alarm_location):
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_alarmMessage/" + sensor_type + "/" + alarm_location)
+    chromium.open_url("localhost:8080/i_alarmMessage/" + sensor_type + "/" + alarm_location)
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
     return dict(status="OK")

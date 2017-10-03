@@ -1,5 +1,5 @@
-#!/usr/bin/python
-from access_modules import iceweasel, monitor
+#!/usr/bin/python3
+from access_modules import chromium, monitor
 import sys
 import time
 import atexit
@@ -42,7 +42,7 @@ def display_soccer_table1():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerTable/1")
+    chromium.open_url("localhost:8080/i_soccerTable/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -51,7 +51,7 @@ def display_soccer_table2():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerTable/2")
+    chromium.open_url("localhost:8080/i_soccerTable/2")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -60,7 +60,7 @@ def display_soccer_matches1():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerMatches/1")
+    chromium.open_url("localhost:8080/i_soccerMatches/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -69,7 +69,7 @@ def display_soccer_matches2():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_soccerMatches/2")
+    chromium.open_url("localhost:8080/i_soccerMatches/2")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -78,7 +78,7 @@ def display_current_weather():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentWeather")
+    chromium.open_url("localhost:8080/i_currentWeather")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -87,7 +87,7 @@ def display_current_solar():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentSolar")
+    chromium.open_url("localhost:8080/i_currentSolar")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -96,7 +96,7 @@ def display_current_time():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_currentTime")
+    chromium.open_url("localhost:8080/i_currentTime")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -105,7 +105,7 @@ def display_pic_of_the_day():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_picOfTheDay")
+    chromium.open_url("localhost:8080/i_picOfTheDay")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -114,7 +114,7 @@ def display_camera():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_display_camera/1")
+    chromium.open_url("localhost:8080/i_display_camera/1")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -123,7 +123,7 @@ def meckesheim_liga():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
+    chromium.open_url("www.fussball.de/mannschaft/fc-germ-meckesheim-moenchzell-fc-germ-meckesheim-moenchzell-baden/-/saison/1617/team-id/01L785U8VS000000VV0AG80NVT9OCUEA#!/section/teamFixturesMatchdayLeagueTable")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -132,7 +132,7 @@ def alarm_status():
     status = monitor.status()
     if status == "OFF":
         monitor.switch_on()
-    iceweasel.open_url("localhost:8080/i_alarm_status")
+    chromium.open_url("localhost:8080/i_alarm_status")
     if not monitor.TIMER_RUNNING:
         monitor.start_timer()
 
@@ -166,30 +166,8 @@ def setup_touch_loop():
             pin_bit = 1 << pin
             if touched & pin_bit:
                 if function_to_call:
-                    if pin == 8:    # Radio on/off
-                        function_to_call = evaluate_pressing_time(function_to_call, cap)
-                    if pin == 9:    # Radio volume
-                        function_to_call = evaluate_pressing_time(function_to_call, cap)
-
                     eval(function_to_call)
                     break
-
-
-def evaluate_pressing_time(function_to_call, cap):
-    presstime = 0
-    split_function = function_to_call.split('|')
-    while True:
-        if cap.is_touched(8) or cap.is_touched(9):
-            presstime += 1
-        else:
-            if presstime < 7:
-                logger.info("Returned function: %s", split_function[0])
-                return split_function[0]
-            else:
-                logger.info("Returned function: %s", split_function[1])
-                return split_function[1]
-
-        time.sleep(0.15)
 
 
 if __name__ == '__main__':

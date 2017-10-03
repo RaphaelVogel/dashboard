@@ -4,3 +4,4 @@ cherrypy
 requests
 beautifulsoup4
 RPi.GPIO
+pychrome
