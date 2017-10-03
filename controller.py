@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 from access_modules import chromium, monitor
 import sys
 import time
