@@ -8,12 +8,12 @@ import web.routes
 # logger configuration
 logger = logging.getLogger("server_logger")
 logger.setLevel(logging.WARN)
-filehandler = RotatingFileHandler('./dashboard/log_server.txt', maxBytes=100000, backupCount=3)
+filehandler = RotatingFileHandler('/home/pi/dashboard/log_server.txt', maxBytes=100000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
 filehandler.setFormatter(formatter)
 logger.addHandler(filehandler)
 
-TEMPLATE_PATH.insert(0, './dashboard/web/views')
+TEMPLATE_PATH.insert(0, '/home/pi/dashboard/web/views')
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':

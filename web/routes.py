@@ -8,12 +8,12 @@ logger = logging.getLogger("server_logger")
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
-    return static_file('index.html', root='./dashboard/web')
+    return static_file('index.html', root='/home/pi/dashboard/web')
 
 
 @route('/lib/<filepath:path>')
 def serve_static(filepath):
-    return static_file(filepath, root='./dashboard/web/lib')
+    return static_file(filepath, root='/home/pi/dashboard/web/lib')
 
 
 # ---------------------------------------------------------------------------------------------------------
