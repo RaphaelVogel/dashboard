@@ -1,9 +1,10 @@
 import requests
-import ConfigParser
+import configparser
 
-config = ConfigParser.RawConfigParser()
-config.read('/home/pi/dashboard/tools/config.txt')
-base_url = config.get('base', 'url')
+cfg = configparser.ConfigParser()
+cfg.read('/home/pi/dashboard/tools/config.txt')
+
+base_url = cfg['base']['url']
 
 
 def get_solar_data():
