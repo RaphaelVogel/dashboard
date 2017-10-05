@@ -15,7 +15,7 @@ def switch_on():
 
 
 def status():
-    out = subprocess.check_output("/opt/vc/bin/tvservice -s", shell=True)
+    out = subprocess.check_output("/opt/vc/bin/tvservice -s", universal_newlines=True, shell=True)
     if "TV is off" in out:
         return "OFF"
     else:
