@@ -4,4 +4,4 @@ cherrypy==8.9.1
 requests
 beautifulsoup4
 RPi.GPIO
-pychrome
+chromote
