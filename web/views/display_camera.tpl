@@ -13,7 +13,7 @@
    <body class="container">
    <div>
      <h3>{{data['name']}}</>
-     <img src="{{data['url']}}" />
+     <img src="{{data['url']}}" width="98%" height="98%" />
    </div>
   </body>
 </html>
