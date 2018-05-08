@@ -43,8 +43,6 @@
                 {{weather['temperature']}} Grad</span></h1>
             <h1 class="text-primary">Luftfeuchte<span class="right">
                 {{weather['humidity']}} %</span></h1>
-            <h1 class="text-primary">Luftdruck<span class="right">
-                {{weather['pressure']}} mBar</span></h1>
         </div>
     </div>
   </body>
