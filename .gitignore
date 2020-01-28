@@ -4,6 +4,7 @@ pip-log.txt
 tools/config.txt
 __init__.pyc
 *.pyc
+.vscode
 log_controller.txt
 log_dashboard.txt
 web/.DS_Store
