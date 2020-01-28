@@ -1,7 +1,5 @@
-# install modules with: pip install -r requirements.txt
-bottle==0.12.13
-cherrypy==8.9.1
-requests
-beautifulsoup4
-RPi.GPIO
-chromote
+# install modules with: pip3 install -r requirements.txt
+bottle==0.12.18
+requests==2.22.0
+beautifulsoup4==4.8.2
+chromote==0.4.0

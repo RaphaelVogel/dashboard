@@ -2,7 +2,7 @@ import requests
 import configparser
 
 cfg = configparser.ConfigParser()
-cfg.read('/home/pi/dashboard/tools/config.txt')
+cfg.read('./tools/config.txt')
 
 base_url = cfg['base']['url']
 

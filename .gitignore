@@ -1,15 +1,11 @@
 log.txt
 __pycache__/
 pip-log.txt
-.idea/
 tools/config.txt
 __init__.pyc
 *.pyc
-update.yml
-update_all.yml
-host
 log_controller.txt
-log_server.txt
+log_dashboard.txt
 web/.DS_Store
 web/lib/.DS_Store
 web/lib/images/.DS_Store

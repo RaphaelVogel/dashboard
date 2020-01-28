@@ -1,36 +1,58 @@
 #!/usr/bin/python
 import subprocess
+import logging
+from enum import Enum
+from subprocess import CalledProcessError
 from threading import Timer
+
+logger = logging.getLogger("dashboard_logger")
 
 TIMER_RUNNING = False
 TIMER_START = 210.0
 
 
+class Status(Enum):
+    ON = "ON"
+    OFF = "OFF"
+
+
 def switch_off():
-    subprocess.call("/opt/vc/bin/tvservice -o", shell=True)
+    try:
+        subprocess.call("/opt/vc/bin/tvservice -o", shell=True)
+    except CalledProcessError:
+        logger.warning('Cannot switch off monitor')
 
 
 def switch_on():
-    subprocess.call("/opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7", shell=True)
+    try:
+        subprocess.call("/opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7", shell=True)
+    except CalledProcessError:
+        logger.warning('Cannot switch on monitor')
 
 
 def status():
-    out = subprocess.check_output("/opt/vc/bin/tvservice -s", universal_newlines=True, shell=True)
+    out = ""
+    try:
+        out = subprocess.check_output("/opt/vc/bin/tvservice -s", universal_newlines=True, shell=True)
+    except CalledProcessError:
+        logger.warning('Cannot get monitor status')
+        return None
+
     if "TV is off" in out:
-        return "OFF"
+        return Status.OFF
     else:
-        return "ON"
+        return Status.ON
 
 
 # --- Start thread to turn off monitor ------------------------------------------------------------------------------
-def turn_monitor_off():
+def _turn_monitor_off():
     switch_off()
     global TIMER_RUNNING
     TIMER_RUNNING = False
 
 
 def start_timer():
-    timer = Timer(TIMER_START, turn_monitor_off)
+    timer = Timer(TIMER_START, _turn_monitor_off)
     timer.start()
     global TIMER_RUNNING
     TIMER_RUNNING = True

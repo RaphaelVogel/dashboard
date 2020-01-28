@@ -1,7 +1,7 @@
 import configparser
 
 cfg = configparser.ConfigParser()
-cfg.read('/home/pi/dashboard/tools/config.txt')
+cfg.read('./tools/config.txt')
 
 
 def get_camera_data(number):
