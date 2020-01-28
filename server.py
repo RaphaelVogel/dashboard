@@ -31,6 +31,18 @@ logger.addHandler(filehandler)
 TEMPLATE_PATH.insert(0, './web/views')
 
 
+# decorator to controll monitor
+def monitor_handling(func):
+    def wrapper(*args, **kwargs):
+        status = monitor.status()
+        if status == monitor.Status.OFF:
+            monitor.switch_on()
+        func(*args, **kwargs)
+        if not monitor.TIMER_RUNNING:
+            monitor.start_timer()
+    return wrapper
+
+
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
@@ -58,101 +70,65 @@ def switch_monitor(status):
 
 
 @route('/setURL/<url>')
+@monitor_handling
 def set_url(url):
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url(url)
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/soccerTable/<liga>')
+@monitor_handling
 def show_soccer_table(liga):
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_soccerTable/" + liga)
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/currentWeather')
+@monitor_handling
 def show_current_weather():
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_currentWeather")
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/currentSolar')
+@monitor_handling
 def show_current_solar():
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_currentSolar")
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/currentTime')
+@monitor_handling
 def show_current_time():
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_currentTime")
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/soccerMatches/<liga>')
+@monitor_handling
 def show_soccer_matches(liga):
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_soccerMatches/" + liga)
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/picOfTheDay')
+@monitor_handling
 def show_pic_of_the_day():
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_picOfTheDay")
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/displayCamera/<cam>')
+@monitor_handling
 def display_camera(cam):
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_display_camera/" + cam)
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
 @route('/alarmMessage/<sensor_type>/<alarm_location>')
+@monitor_handling
 def alarm_message(sensor_type, alarm_location):
-    status = monitor.status()
-    if status == monitor.Status.OFF:
-        monitor.switch_on()
     chromium.open_url("localhost:8080/i_alarmMessage/" + sensor_type + "/" + alarm_location)
-    if not monitor.TIMER_RUNNING:
-        monitor.start_timer()
     return dict(status="OK")
 
 
