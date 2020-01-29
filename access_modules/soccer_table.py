@@ -14,7 +14,7 @@ def get_table_data(liga):
     if resp.status_code != 200:
         return "ERROR: Cannot connect to soccer url"
 
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, 'html.parser')
     tables = soup.find_all("table")
     # table[0] is 'Aktueller Spieltag', table[1] is 'Tabelle'
     return_table = []
@@ -61,7 +61,7 @@ def get_match_data(liga):
     if resp.status_code != 200:
         return "ERROR: Cannot connect to soccer url"
 
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, 'html.parser')
     tables = soup.find_all("table")
     # table[0] is 'Aktueller Spieltag', table[1] is 'Tabelle'
     return_table = []

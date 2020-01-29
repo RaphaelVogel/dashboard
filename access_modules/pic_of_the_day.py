@@ -9,7 +9,7 @@ def get_pic_url():
     if resp.status_code != 200:
         return "ERROR: Cannot connect to picture of the day url"
 
-    soup = BeautifulSoup(resp.text)
+    soup = BeautifulSoup(resp.text, 'html.parser')
     meta_tags = soup.find_all("meta")
     return_data = {}
     for meta_tag in meta_tags:
