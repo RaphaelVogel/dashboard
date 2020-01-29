@@ -1,4 +1,5 @@
 import sys
+import os
 import logging
 from logging.handlers import RotatingFileHandler
 from bottle import (
@@ -28,7 +29,9 @@ formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datef
 filehandler.setFormatter(formatter)
 logger.addHandler(filehandler)
 
-TEMPLATE_PATH.insert(0, './web/views')
+# bottle initialization
+current_dir = os.path.abspath(os.path.dirname(__file__))
+TEMPLATE_PATH.append(os.path.join(current_dir, 'web/views/'))
 
 
 # decorator to controll monitor
@@ -55,7 +58,7 @@ def serve_static(filepath):
 
 
 # ---------------------------------------------------------------------------------------------------------
-# --- Public routes ---
+# --- Command/public routes ---
 # ---------------------------------------------------------------------------------------------------------
 @route('/monitor/<status>')
 def switch_monitor(status):
@@ -133,10 +136,11 @@ def alarm_message(sensor_type, alarm_location):
 
 
 # ---------------------------------------------------------------------------------------------------------
-# --- Button pressed routes / private routes ---
+# --- Web/Button pressed routes ---
 # ---------------------------------------------------------------------------------------------------------
 @route('/i_soccerTable/<liga>')
 @view('soccer_ranking')
+@monitor_handling
 def i_show_soccer_table(liga):
     try:
         data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
@@ -146,6 +150,7 @@ def i_show_soccer_table(liga):
 
 
 @route('/i_currentSolar')
+@monitor_handling
 def i_show_current_solar():
     try:
         data = current_solar.get_solar_data()  # a dictionary of solar data
@@ -159,12 +164,14 @@ def i_show_current_solar():
 
 @route('/i_currentTime')
 @view('current_time')
+@monitor_handling
 def i_show_current_time():
     return None
 
 
 @route('/i_soccerMatches/<liga>')
 @view('soccer_matches')
+@monitor_handling
 def i_show_soccer_matches(liga):
     try:
         data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
@@ -175,6 +182,7 @@ def i_show_soccer_matches(liga):
 
 @route('/i_picOfTheDay')
 @view('pic_of_the_day')
+@monitor_handling
 def i_show_pic_of_the_day():
     try:
         ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
@@ -185,6 +193,7 @@ def i_show_pic_of_the_day():
 
 @route('/i_display_camera/<cam>')
 @view('display_camera')
+@monitor_handling
 def i_display_camera(cam):
     try:
         ret_data = camera.get_camera_data(cam)
@@ -195,6 +204,6 @@ def i_display_camera(cam):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':
-        run(host='localhost', port=8080, debug=True, reloader=True)
+        run(server='cheroot', host='localhost', port=8080, debug=True, reloader=True)
     else:
-        run(host='0.0.0.0', port=8080, debug=False, reloader=False)
+        run(server='cheroot', host='0.0.0.0', port=8080, debug=False, reloader=False)

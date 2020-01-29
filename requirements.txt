@@ -1,5 +1,6 @@
 # install modules with: pip3 install -r requirements.txt
-bottle==0.12.18
+git+https://github.com/bottlepy/bottle
 requests==2.22.0
 beautifulsoup4==4.8.2
 chromote==0.4.0
+cheroot==8.2.1
