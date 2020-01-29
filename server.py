@@ -80,58 +80,44 @@ def set_url(url):
 
 
 @route('/soccerTable/<liga>')
-@monitor_handling
 def show_soccer_table(liga):
     chromium.open_url("localhost:8080/i_soccerTable/" + liga)
     return dict(status="OK")
 
 
 @route('/currentWeather')
-@monitor_handling
 def show_current_weather():
     chromium.open_url("localhost:8080/i_currentWeather")
     return dict(status="OK")
 
 
 @route('/currentSolar')
-@monitor_handling
 def show_current_solar():
     chromium.open_url("localhost:8080/i_currentSolar")
     return dict(status="OK")
 
 
 @route('/currentTime')
-@monitor_handling
 def show_current_time():
     chromium.open_url("localhost:8080/i_currentTime")
     return dict(status="OK")
 
 
 @route('/soccerMatches/<liga>')
-@monitor_handling
 def show_soccer_matches(liga):
     chromium.open_url("localhost:8080/i_soccerMatches/" + liga)
     return dict(status="OK")
 
 
 @route('/picOfTheDay')
-@monitor_handling
 def show_pic_of_the_day():
     chromium.open_url("localhost:8080/i_picOfTheDay")
     return dict(status="OK")
 
 
 @route('/displayCamera/<cam>')
-@monitor_handling
 def display_camera(cam):
     chromium.open_url("localhost:8080/i_display_camera/" + cam)
-    return dict(status="OK")
-
-
-@route('/alarmMessage/<sensor_type>/<alarm_location>')
-@monitor_handling
-def alarm_message(sensor_type, alarm_location):
-    chromium.open_url("localhost:8080/i_alarmMessage/" + sensor_type + "/" + alarm_location)
     return dict(status="OK")
 
 
