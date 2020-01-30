@@ -34,7 +34,7 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_PATH.append(os.path.join(current_dir, 'web/views/'))
 
 
-# decorator to controll monitor
+# decorator to control monitor
 def monitor_handling(func):
     def wrapper(*args, **kwargs):
         status = monitor.status()
@@ -71,13 +71,6 @@ def switch_monitor(status):
     else:
         return HTTPResponse(dict(error="Wrong url to switch monitor, use ON or OFF"), status=500)
 
-    return dict(status="OK")
-
-
-@route('/setURL/<url>')
-@monitor_handling
-def set_url(url):
-    chromium.open_url(url)
     return dict(status="OK")
 
 
