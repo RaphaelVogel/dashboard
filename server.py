@@ -173,14 +173,10 @@ def i_show_pic_of_the_day():
 
 
 @route('/i_display_camera/<cam>')
-@view('display_camera')
 @monitor_handling
 def i_display_camera(cam):
-    try:
-        ret_data = camera.get_camera_data(cam)
-        return dict(data=ret_data)
-    except Exception as e:
-        logger.error(str(e))
+    camera.display_camera_data(cam)
+    return None
 
 
 if __name__ == '__main__':

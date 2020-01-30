@@ -1,10 +1,14 @@
 import configparser
+import time
+from omxplayer.player import OMXPlayer
+
 
 cfg = configparser.ConfigParser()
 cfg.read('./tools/config.txt')
 
 
-def get_camera_data(number):
-    camera_name = cfg['cam' + str(number)]['name']
+def display_camera_data(number):
     camera_url = cfg['cam' + str(number)]['url']
-    return {'name': camera_name, 'url': camera_url}
+    player = OMXPlayer(camera_url)
+    time.sleep(15)
+    player.quit()
