@@ -64,9 +64,9 @@ def serve_static(filepath):
 # ---------------------------------------------------------------------------------------------------------
 @route('/monitor/<status>')
 def switch_monitor(status):
-    if status == monitor.Status.ON:
+    if status == monitor.Status.ON.value:
         monitor.switch_on()
-    elif status == monitor.Status.OFF:
+    elif status == monitor.Status.OFF.value:
         monitor.switch_off()
     else:
         return HTTPResponse(dict(error="Wrong url to switch monitor, use ON or OFF"), status=500)
