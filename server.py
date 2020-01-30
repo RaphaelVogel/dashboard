@@ -40,9 +40,11 @@ def monitor_handling(func):
         status = monitor.status()
         if status == monitor.Status.OFF:
             monitor.switch_on()
-        func(*args, **kwargs)
+        ret_value = func(*args, **kwargs)
         if not monitor.TIMER_RUNNING:
             monitor.start_timer()
+        return ret_value
+
     return wrapper
 
 
