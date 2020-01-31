@@ -176,7 +176,6 @@ def i_show_pic_of_the_day():
 @monitor_handling
 def i_display_camera(cam):
     camera.display_camera_data(cam)
-    return None
 
 
 if __name__ == '__main__':
