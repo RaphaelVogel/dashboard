@@ -16,9 +16,9 @@ def display_camera_data(number):
     if camera_url == g_camera_url and g_timer_running:
         return
     player = OMXPlayer(camera_url)
-    camera_url = camera_url
+    g_camera_url = camera_url
     g_timer_running = True
-    timer = Timer(120.0, _quit_camera, args=player)
+    timer = Timer(120.0, _quit_camera, args=(player,))
     timer.start()
 
 
