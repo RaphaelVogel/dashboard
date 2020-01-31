@@ -18,7 +18,7 @@ def display_camera_data(number):
     player = OMXPlayer(camera_url)
     g_camera_url = camera_url
     g_timer_running = True
-    timer = Timer(120.0, _quit_camera, args=(player,))
+    timer = Timer(60.0, _quit_camera, args=(player,))
     timer.start()
 
 
@@ -26,4 +26,3 @@ def _quit_camera(player):
     player.quit()
     global g_timer_running
     g_timer_running = False
-

@@ -8,7 +8,7 @@ from threading import Timer
 logger = logging.getLogger("dashboard_logger")
 
 TIMER_RUNNING = False
-TIMER_START = 210.0
+TIMER_START = 180.0
 
 
 class Status(Enum):
