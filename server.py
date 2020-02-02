@@ -22,7 +22,7 @@ from access_modules import (
 
 
 # logger configuration
-current_dir = Path(__file__).resolve()
+current_dir = Path(__file__).resolve().parent
 logger = logging.getLogger("dashboard_logger")
 logger.setLevel(logging.WARN)
 filehandler = RotatingFileHandler(Path(current_dir, 'log_dashboard.txt'), maxBytes=100000, backupCount=3)
