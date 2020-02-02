@@ -7,9 +7,10 @@ root_dir = Path(__file__).resolve().parent.parent
 cfg = configparser.ConfigParser()
 cfg.read(Path(root_dir, 'tools/config.txt'))
 
+
 g_camera_url = None
 g_timer_running = False
-CAMERA_ON_TIME = 60.0
+CAMERA_ON_TIME = 45.0
 
 
 def display_camera_data(number):
