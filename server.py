@@ -22,15 +22,15 @@ from access_modules import (
 
 
 # logger configuration
+current_dir = os.path.dirname(os.path.abspath(__file__))
 logger = logging.getLogger("dashboard_logger")
 logger.setLevel(logging.WARN)
-filehandler = RotatingFileHandler('./log_dashboard.txt', maxBytes=100000, backupCount=3)
+filehandler = RotatingFileHandler(os.path.join(current_dir, 'log_dashboard.txt'), maxBytes=100000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
 filehandler.setFormatter(formatter)
 logger.addHandler(filehandler)
 
 # bottle initialization
-current_dir = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_PATH.append(os.path.join(current_dir, 'web/views/'))
 
 
