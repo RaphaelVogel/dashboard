@@ -1,5 +1,4 @@
 import configparser
-import requests
 from pathlib import Path
 from omxplayer.player import OMXPlayer
 from threading import Timer
@@ -30,4 +29,3 @@ def _quit_camera(player):
     player.quit()
     global g_timer_running
     g_timer_running = False
-    requests.get('http://192.168.0.6:8080/i_currentTime')
