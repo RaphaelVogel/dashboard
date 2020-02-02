@@ -1,8 +1,10 @@
 import requests
 import configparser
+from pathlib import Path
 
+root_dir = Path(__file__).resolve().parent
 cfg = configparser.ConfigParser()
-cfg.read('tools/config.txt')
+cfg.read(Path(root_dir, 'tools/config.txt')
 
 base_url = cfg['base']['url']
 

@@ -1,7 +1,7 @@
 import sys
-import os
 import logging
 from logging.handlers import RotatingFileHandler
+from pathlib import Path
 from bottle import (
     run,
     route,
@@ -22,16 +22,16 @@ from access_modules import (
 
 
 # logger configuration
-current_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir = Path(__file__).resolve())
 logger = logging.getLogger("dashboard_logger")
 logger.setLevel(logging.WARN)
-filehandler = RotatingFileHandler(os.path.join(current_dir, 'log_dashboard.txt'), maxBytes=100000, backupCount=3)
+filehandler = RotatingFileHandler(Path(current_dir, 'log_dashboard.txt'), maxBytes=100000, backupCount=3)
 formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
 filehandler.setFormatter(formatter)
 logger.addHandler(filehandler)
 
 # bottle initialization
-TEMPLATE_PATH.append(os.path.join(current_dir, 'web/views/'))
+TEMPLATE_PATH.append(Path(current_dir, 'web/views'))
 
 
 # decorator to control monitor
@@ -51,12 +51,12 @@ def monitor_handling(func):
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
-    return static_file('index.html', root='./web')
+    return static_file('index.html', root=Path(current_dir, 'web'))
 
 
 @route('/lib/<filepath:path>')
 def serve_static(filepath):
-    return static_file(filepath, root='./web/lib')
+    return static_file(filepath, root=Path(current_dir, 'web/lib'))
 
 
 # ---------------------------------------------------------------------------------------------------------
