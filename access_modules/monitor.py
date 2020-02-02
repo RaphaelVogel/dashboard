@@ -8,7 +8,7 @@ from threading import Timer
 logger = logging.getLogger("dashboard_logger")
 
 TIMER_RUNNING = False
-TIMER_START = 180.0
+MONITOR_ON_TIME = 180.0
 
 
 class Status(Enum):
@@ -52,7 +52,7 @@ def _turn_monitor_off():
 
 
 def start_timer():
-    timer = Timer(TIMER_START, _turn_monitor_off)
+    timer = Timer(MONITOR_ON_TIME, _turn_monitor_off)
     timer.start()
     global TIMER_RUNNING
     TIMER_RUNNING = True

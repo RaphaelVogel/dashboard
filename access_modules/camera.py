@@ -4,10 +4,11 @@ from threading import Timer
 
 
 cfg = configparser.ConfigParser()
-cfg.read('./tools/config.txt')
+cfg.read('tools/config.txt')
 
 g_camera_url = None
 g_timer_running = False
+CAMERA_ON_TIME = 60.0
 
 
 def display_camera_data(number):
@@ -18,7 +19,7 @@ def display_camera_data(number):
     player = OMXPlayer(camera_url)
     g_camera_url = camera_url
     g_timer_running = True
-    timer = Timer(60.0, _quit_camera, args=(player,))
+    timer = Timer(CAMERA_ON_TIME, _quit_camera, args=(player,))
     timer.start()
 
 
