@@ -10,7 +10,7 @@ cfg.read(Path(root_dir, 'tools/config.txt'))
 
 g_camera_url = None
 g_timer_running = False
-CAMERA_ON_TIME = 45.0
+CAMERA_ON_TIME = 30.0
 
 
 def display_camera_data(number):
