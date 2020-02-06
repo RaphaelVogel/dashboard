@@ -3,18 +3,7 @@ import time
 import board
 import busio
 import adafruit_mpr121
-import logging
-from pathlib import Path
 from access_modules import chromium
-from logging.handlers import RotatingFileHandler
-
-current_dir = Path(__file__).resolve().parent
-logger = logging.getLogger("dashboard_logger")
-logger.setLevel(logging.WARN)
-filehandler = RotatingFileHandler(Path(current_dir, 'log_controller.txt'), maxBytes=100000, backupCount=3)
-formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
-filehandler.setFormatter(formatter)
-logger.addHandler(filehandler)
 
 
 # Define mapping of capacitive touch pin to method calls
@@ -82,7 +71,7 @@ def setup_touch_loop():
                     # call function
                     globals()[function_name]()
 
-        time.sleep(0.15)  # Small delay to keep from spamming output messages.
+        time.sleep(0.15)  # Small delay get some CPU
 
 
 if __name__ == '__main__':
