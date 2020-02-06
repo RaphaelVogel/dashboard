@@ -66,7 +66,7 @@ def display_pic_of_the_day():
     chromium.open_url("localhost:8080/i_picOfTheDay")
 
 
-def display_camera():
+def display_camera_hof():
     chromium.open_url("localhost:8080/i_display_camera/1")
 
 
