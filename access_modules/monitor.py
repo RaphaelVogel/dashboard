@@ -23,7 +23,7 @@ def switch_off():
 def switch_on():
     try:
         subprocess.call("/opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7", shell=True)
-        timer = Timer(MONITOR_ON_TIME, _turn_monitor_off)
+        timer = Timer(MONITOR_ON_TIME, switch_off)
         timer.start()
     except CalledProcessError:
         logger.warning('Cannot switch on monitor')
@@ -42,6 +42,3 @@ def status():
     else:
         return Status.ON
 
-
-def _turn_monitor_off():
-    switch_off()
