@@ -38,7 +38,7 @@ TEMPLATE_PATH.append(Path(current_dir, 'web/views'))
 def monitor_handling(func):
     def wrapper(*args, **kwargs):
         status = monitor.status()
-        if status == monitor.Status.OFF:
+        if status is monitor.Status.OFF:
             monitor.switch_on()
         return func(*args, **kwargs)
 
