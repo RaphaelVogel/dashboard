@@ -2,6 +2,7 @@ import sys
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from threading import Timer
 from bottle import (
     run,
     route,
@@ -176,6 +177,7 @@ def i_display_camera(cam):
 
 
 if __name__ == '__main__':
+    Timer(5.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':
         run(server='cheroot', host='localhost', port=8080, debug=True, reloader=True)
     else:
