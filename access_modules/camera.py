@@ -1,5 +1,3 @@
-import configparser
-from pathlib import Path
 from omxplayer.player import OMXPlayer
 from threading import Timer
 from access_modules import cfg
@@ -7,7 +5,7 @@ from access_modules import cfg
 
 g_camera_url = None
 g_timer_running = False
-CAMERA_ON_TIME = 30.0
+CAMERA_ON_TIME = 40.0
 
 
 def display_camera_data(number):

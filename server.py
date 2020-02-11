@@ -9,7 +9,6 @@ from bottle import (
     static_file,
     HTTPResponse,
     view,
-    template,
     TEMPLATE_PATH,
 )
 from access_modules import (
@@ -177,7 +176,7 @@ def i_display_camera(cam):
 
 
 if __name__ == '__main__':
-    Timer(5.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
+    Timer(8.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':
         run(server='cheroot', host='localhost', port=8080, debug=True, reloader=True)
     else:
