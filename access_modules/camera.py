@@ -1,4 +1,4 @@
-from omxplayer.player import OMXPlayer
+from omxplayer.player import OMXPlayer  # pylint: disable=import-error
 from threading import Timer
 from access_modules import cfg
 
@@ -20,3 +20,5 @@ def display_camera_data(number):
 
 def _quit_camera(player):
     player.quit()
+    global g_camera_url
+    g_camera_url = None
