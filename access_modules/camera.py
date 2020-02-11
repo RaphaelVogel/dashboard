@@ -4,23 +4,19 @@ from access_modules import cfg
 
 
 g_camera_url = None
-g_timer_running = False
 CAMERA_ON_TIME = 40.0
 
 
 def display_camera_data(number):
     camera_url = cfg['cam' + str(number)]['url']
-    global g_timer_running, g_camera_url
-    if camera_url == g_camera_url and g_timer_running:
+    global g_camera_url
+    if camera_url == g_camera_url:
         return
     player = OMXPlayer(camera_url)
     g_camera_url = camera_url
-    g_timer_running = True
     timer = Timer(CAMERA_ON_TIME, _quit_camera, args=(player,))
     timer.start()
 
 
 def _quit_camera(player):
     player.quit()
-    global g_timer_running
-    g_timer_running = False
