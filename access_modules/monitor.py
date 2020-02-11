@@ -41,4 +41,3 @@ def status():
         return Status.OFF
     else:
         return Status.ON
-

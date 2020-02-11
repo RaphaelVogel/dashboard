@@ -16,7 +16,6 @@ from access_modules import (
     chromium,
     monitor,
     soccer_table,
-    current_solar,
     pic_of_the_day,
     camera,
 )
@@ -131,14 +130,15 @@ def i_show_soccer_table(liga):
 @route('/i_currentSolar')
 @monitor_handling
 def i_show_current_solar():
-    try:
-        data = current_solar.get_solar_data()  # a dictionary of solar data
-        if data:
-            return template('current_solar', solar=data)
-        else:
-            return template('error_solar')
-    except Exception as e:
-        logger.error(str(e))
+    pass
+#    try:
+#        data = solar.read_data()  # a dictionary of solar data
+#        if data:
+#            return template('current_solar', solar=data)
+#        else:
+#            return template('error_solar')
+#    except Exception as e:
+#        logger.error(str(e))
 
 
 @route('/i_currentTime')

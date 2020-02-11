@@ -2,10 +2,7 @@ import configparser
 from pathlib import Path
 from omxplayer.player import OMXPlayer
 from threading import Timer
-
-root_dir = Path(__file__).resolve().parent.parent
-cfg = configparser.ConfigParser()
-cfg.read(Path(root_dir, 'tools/config.txt'))
+from access_modules import cfg
 
 
 g_camera_url = None
