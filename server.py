@@ -10,6 +10,7 @@ from bottle import (
     HTTPResponse,
     view,
     TEMPLATE_PATH,
+    template,
 )
 from access_modules import (
     chromium,
@@ -17,6 +18,7 @@ from access_modules import (
     soccer_table,
     pic_of_the_day,
     camera,
+    solar,
 )
 
 
@@ -127,17 +129,18 @@ def i_show_soccer_table(liga):
 
 
 @route('/i_currentSolar')
+@view('current_solar')
 @monitor_handling
 def i_show_current_solar():
     pass
-#    try:
-#        data = solar.read_data()  # a dictionary of solar data
-#        if data:
-#            return template('current_solar', solar=data)
-#        else:
-#            return template('error_solar')
-#    except Exception as e:
-#        logger.error(str(e))
+    try:
+        data = solar.read_data()  # a dictionary of solar data
+        if data:
+            return template('current_solar', solar=data)
+        else:
+            return template('error_solar')
+    except Exception as e:
+        logger.error(str(e))
 
 
 @route('/i_currentTime')
