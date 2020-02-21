@@ -15,14 +15,14 @@ class Status(Enum):
 
 def switch_off():
     try:
-        subprocess.call("/opt/vc/bin/tvservice -o", shell=True)
+        subprocess.call("vcgencmd display_power 0", shell=True)
     except CalledProcessError:
         logger.warning('Cannot switch off monitor')
 
 
 def switch_on():
     try:
-        subprocess.call("/opt/vc/bin/tvservice -p; sudo chvt 6; sudo chvt 7", shell=True)
+        subprocess.call("vcgencmd display_power 1", shell=True)
         timer = Timer(MONITOR_ON_TIME, switch_off)
         timer.start()
     except CalledProcessError:
@@ -32,12 +32,12 @@ def switch_on():
 def status():
     out = ""
     try:
-        out = subprocess.check_output("/opt/vc/bin/tvservice -s", universal_newlines=True, shell=True)
+        out = subprocess.check_output("vcgencmd display_power", shell=True)
     except CalledProcessError:
         logger.warning('Cannot get monitor status')
         return None
 
-    if "TV is off" in out:
+    if "display_power=0" in out:
         return Status.OFF
     else:
         return Status.ON
