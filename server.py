@@ -38,7 +38,9 @@ TEMPLATE_PATH.append(Path(current_dir, 'web/views'))
 # decorator to control monitor
 def monitor_handling(func):
     def wrapper(*args, **kwargs):
-        monitor.switch_on()
+        status = monitor.status()
+        if status is monitor.Status.OFF:
+            monitor.switch_on()
         return func(*args, **kwargs)
 
     return wrapper
