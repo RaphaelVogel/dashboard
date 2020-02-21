@@ -32,7 +32,7 @@ def switch_on():
 def status():
     out = ""
     try:
-        out = subprocess.check_output("vcgencmd display_power", shell=True)
+        out = subprocess.check_output("vcgencmd display_power", universal_newlines=True, shell=True)
     except CalledProcessError:
         logger.warning('Cannot get monitor status')
         return None
