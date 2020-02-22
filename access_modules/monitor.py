@@ -1,10 +1,7 @@
 import subprocess
-import logging
 from enum import Enum
-from subprocess import CalledProcessError
 from threading import Timer
 
-logger = logging.getLogger("dashboard_logger")
 MONITOR_ON_TIME = 60.0
 g_timer = None
 
@@ -16,21 +13,15 @@ class Status(Enum):
 
 def switch_off():
     global g_timer
-    try:
-        subprocess.call("vcgencmd display_power 0", shell=True)
-        g_timer = None
-    except CalledProcessError:
-        logger.warning('Cannot switch off monitor')
+    subprocess.call("vcgencmd display_power 0", shell=True)
+    g_timer = None
 
 
 def switch_on():
     global g_timer
-    try:
-        subprocess.call("vcgencmd display_power 1", shell=True)
-        g_timer = Timer(MONITOR_ON_TIME, switch_off)
-        g_timer.start()
-    except CalledProcessError:
-        logger.warning('Cannot switch on monitor')
+    subprocess.call("vcgencmd display_power 1", shell=True)
+    g_timer = Timer(MONITOR_ON_TIME, switch_off)
+    g_timer.start()
 
 
 def reset_timer():
@@ -42,13 +33,7 @@ def reset_timer():
 
 
 def status():
-    out = ""
-    try:
-        out = subprocess.check_output("vcgencmd display_power", universal_newlines=True, shell=True)
-    except CalledProcessError:
-        logger.warning('Cannot get monitor status')
-        return None
-
+    out = subprocess.check_output("vcgencmd display_power", universal_newlines=True, shell=True)
     if "display_power=0" in out:
         return Status.OFF
     else:

@@ -1,6 +1,4 @@
 import sys
-import logging
-from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from threading import Timer
 from bottle import (
@@ -23,15 +21,7 @@ from access_modules import (
 )
 
 
-# logger configuration
 current_dir = Path(__file__).resolve().parent
-logger = logging.getLogger("dashboard_logger")
-logger.setLevel(logging.WARN)
-filehandler = RotatingFileHandler(Path(current_dir, 'log_dashboard.txt'), maxBytes=100000, backupCount=3)
-formatter = logging.Formatter('%(asctime)s : %(levelname)s : %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
-filehandler.setFormatter(formatter)
-logger.addHandler(filehandler)
-
 # bottle initialization
 TEMPLATE_PATH.append(Path(current_dir, 'web/views'))
 
@@ -141,11 +131,8 @@ def showURL(url_id):
 @monitor_handling
 @quit_camera
 def i_show_soccer_table(liga):
-    try:
-        data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
-        return dict(liga=liga, table=data)
-    except Exception as e:
-        logger.error(str(e))
+    data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
+    return dict(liga=liga, table=data)
 
 
 @route('/i_currentSolar')
@@ -153,14 +140,11 @@ def i_show_soccer_table(liga):
 @monitor_handling
 @quit_camera
 def i_show_current_solar():
-    try:
-        data = solar.read_data()  # a dictionary of solar data
-        if data:
-            return template('current_solar', solar=data)
-        else:
-            return template('error_solar')
-    except Exception as e:
-        logger.error(str(e))
+    data = solar.read_data()  # a dictionary of solar data
+    if data:
+        return template('current_solar', solar=data)
+    else:
+        return template('error_solar')
 
 
 @route('/i_currentTime')
@@ -176,11 +160,8 @@ def i_show_current_time():
 @monitor_handling
 @quit_camera
 def i_show_soccer_matches(liga):
-    try:
-        data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
-        return dict(liga=liga, matches=data)
-    except Exception as e:
-        logger.error(str(e))
+    data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
+    return dict(liga=liga, matches=data)
 
 
 @route('/i_picOfTheDay')
@@ -188,11 +169,8 @@ def i_show_soccer_matches(liga):
 @monitor_handling
 @quit_camera
 def i_show_pic_of_the_day():
-    try:
-        ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
-        return dict(data=ret_data)
-    except Exception as e:
-        logger.error(str(e))
+    ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
+    return dict(data=ret_data)
 
 
 @route('/i_display_camera/<cam>')
@@ -210,7 +188,7 @@ def i_show_url(url_id):
 
 
 if __name__ == '__main__':
-    Timer(10.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
+    Timer(15.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':
         run(server='cheroot', host='localhost', port=8080, debug=True, reloader=True)
     else:
