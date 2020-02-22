@@ -47,6 +47,16 @@ def monitor_handling(func):
     return wrapper
 
 
+# decorator to quit camera if running
+def quit_camera(func):
+    def wrapper(*args, **kwargs):
+        if camera.camera_active():
+            camera.quit_camera()
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
 # --- Base routes ----------------------------------------------------------------------------------------------------
 @route('/')
 def index():
@@ -127,6 +137,7 @@ def showURL(url_id):
 @route('/i_soccerTable/<liga>')
 @view('soccer_ranking')
 @monitor_handling
+@quit_camera
 def i_show_soccer_table(liga):
     try:
         data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
@@ -138,6 +149,7 @@ def i_show_soccer_table(liga):
 @route('/i_currentSolar')
 @view('current_solar')
 @monitor_handling
+@quit_camera
 def i_show_current_solar():
     pass
     try:
@@ -153,6 +165,7 @@ def i_show_current_solar():
 @route('/i_currentTime')
 @view('current_time')
 @monitor_handling
+@quit_camera
 def i_show_current_time():
     return None
 
@@ -160,6 +173,7 @@ def i_show_current_time():
 @route('/i_soccerMatches/<liga>')
 @view('soccer_matches')
 @monitor_handling
+@quit_camera
 def i_show_soccer_matches(liga):
     try:
         data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
@@ -171,6 +185,7 @@ def i_show_soccer_matches(liga):
 @route('/i_picOfTheDay')
 @view('pic_of_the_day')
 @monitor_handling
+@quit_camera
 def i_show_pic_of_the_day():
     try:
         ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
@@ -187,6 +202,7 @@ def i_display_camera(cam):
 
 @route('/i_show_url/<url_id>')
 @monitor_handling
+@quit_camera
 def i_show_url(url_id):
     url_to_open = cfg['show_url'][url_id]
     chromium.open_url(url_to_open)
