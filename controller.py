@@ -59,6 +59,10 @@ def display_camera_hof():
     chromium.open_url("localhost:8080/i_display_camera/1")
 
 
+def display_maps_meckesheim_heilbronn():
+    chromium.open_url("localhost:8080/i_show_url/meckesheim-heilbronn")
+
+
 # --- Setup the MPR121 device ------------------------------------------------------------------------------------
 def setup_touch_loop():
     i2c = busio.I2C(board.SCL, board.SDA)
