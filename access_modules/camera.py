@@ -5,7 +5,7 @@ from access_modules import cfg, monitor
 
 g_player = None
 g_timer = None
-CAMERA_ON_TIME = 60.0
+CAMERA_ON_TIME = 80.0
 
 
 def display_camera_data(number):
