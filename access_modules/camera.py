@@ -5,7 +5,7 @@ from access_modules import cfg, monitor
 
 g_player = None
 g_timer = None
-CAMERA_ON_TIME = 80.0
+CAMERA_ON_TIME = 100.0
 lock = Lock()
 
 
@@ -30,6 +30,7 @@ def display_camera_data(number):
         g_timer.start()
         monitor.reset_timer()
     lock.release()
+
 
 def quit_camera():
     global g_player, g_timer

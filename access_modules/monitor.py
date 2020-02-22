@@ -2,7 +2,7 @@ import subprocess
 from enum import Enum
 from threading import Timer
 
-MONITOR_ON_TIME = 80.0
+MONITOR_ON_TIME = 100.0
 g_timer = None
 
 
