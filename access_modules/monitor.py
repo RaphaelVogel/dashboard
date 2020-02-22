@@ -5,7 +5,7 @@ from subprocess import CalledProcessError
 from threading import Timer
 
 logger = logging.getLogger("dashboard_logger")
-MONITOR_ON_TIME = 120.0
+MONITOR_ON_TIME = 60.0
 g_timer = None
 
 
