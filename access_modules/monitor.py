@@ -18,9 +18,7 @@ def switch_off():
     global g_timer
     try:
         subprocess.call("vcgencmd display_power 0", shell=True)
-        if g_timer:
-            g_timer.cancel()
-            g_timer = None
+        g_timer = None
     except CalledProcessError:
         logger.warning('Cannot switch off monitor')
 
