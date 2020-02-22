@@ -19,6 +19,7 @@ from access_modules import (
     pic_of_the_day,
     camera,
     solar,
+    cfg,
 )
 
 
@@ -114,6 +115,12 @@ def display_camera(cam):
     return dict(status="OK")
 
 
+@route('/showURL/<url_id>')
+def showURL(url_id):
+    chromium.open_url("localhost:8080/i_show_url/" + url_id)
+    return dict(status="OK")
+
+
 # ---------------------------------------------------------------------------------------------------------
 # --- Web/Button pressed routes ---
 # ---------------------------------------------------------------------------------------------------------
@@ -178,8 +185,15 @@ def i_display_camera(cam):
     camera.display_camera_data(cam)
 
 
+@route('/i_show_url/<url_id>')
+@monitor_handling
+def i_show_url(url_id):
+    url_to_open = cfg['show_url'][url_id]
+    chromium.open_url(url_to_open)
+
+
 if __name__ == '__main__':
-    Timer(8.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
+    Timer(10.0, switch_monitor(monitor.Status.OFF.value)).start()  # initially switch off monitor
     if len(sys.argv) > 1 and sys.argv[1] == 'devmode':
         run(server='cheroot', host='localhost', port=8080, debug=True, reloader=True)
     else:
