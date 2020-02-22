@@ -1,11 +1,11 @@
 from omxplayer.player import OMXPlayer  # pylint: disable=import-error
 from threading import Timer
-from access_modules import cfg
+from access_modules import cfg, monitor
 
 
 g_player = None
 g_timer = None
-CAMERA_ON_TIME = 40.0
+CAMERA_ON_TIME = 120.0
 
 
 def display_camera_data(number):
@@ -16,13 +16,15 @@ def display_camera_data(number):
         g_player = OMXPlayer(camera_url)
         g_timer = Timer(CAMERA_ON_TIME, quit_camera)
         g_timer.start()
+        monitor.reset_timer()
     else:
         if g_player.get_source() != camera_url:
-            # play new stream, reset timer
+            # play new stream, reset timers
             g_player.load(camera_url)
             g_timer.cancel()
             g_timer = Timer(CAMERA_ON_TIME, quit_camera)
             g_timer.start()
+            monitor.reset_timer()
         else:
             # already playing requested stream, do nothing
             pass
