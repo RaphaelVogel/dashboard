@@ -19,15 +19,14 @@ def display_camera_data(number):
         monitor.reset_timer()
     else:
         if g_player.get_source() != camera_url:
-            # play new stream, reset timers
+            # play new stream
             g_player.load(camera_url)
-            g_timer.cancel()
-            g_timer = Timer(CAMERA_ON_TIME, quit_camera)
-            g_timer.start()
-            monitor.reset_timer()
-        else:
-            # already playing requested stream, do nothing
-            pass
+
+        # reset camera and monitor timer
+        g_timer.cancel()
+        g_timer = Timer(CAMERA_ON_TIME, quit_camera)
+        g_timer.start()
+        monitor.reset_timer()
 
 
 def quit_camera():
