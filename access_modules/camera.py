@@ -4,29 +4,38 @@ from access_modules import cfg
 
 
 g_player = None
+g_timer = None
 CAMERA_ON_TIME = 40.0
 
 
 def display_camera_data(number):
     camera_url = cfg['cam' + str(number)]['url']
-    global g_player
+    global g_player, g_timer
     if not g_player:
         # first call
         g_player = OMXPlayer(camera_url)
-        Timer(CAMERA_ON_TIME, quit_camera).start()
+        g_timer = Timer(CAMERA_ON_TIME, quit_camera)
+        g_timer.start()
     else:
         if g_player.get_source() != camera_url:
-            # play new stream
+            # play new stream, reset timer
             g_player.load(camera_url)
+            g_timer.cancel()
+            g_timer = Timer(CAMERA_ON_TIME, quit_camera)
+            g_timer.start()
         else:
             # already playing requested stream, do nothing
             pass
 
 
 def quit_camera():
-    global g_player
-    g_player.quit()
-    g_player = None
+    global g_player, g_timer
+    if g_player:
+        g_player.quit()
+        g_player = None
+    if g_timer:
+        g_timer.cancel()
+        g_timer = None
 
 
 def camera_active():
