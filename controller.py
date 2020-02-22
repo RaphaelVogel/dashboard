@@ -19,7 +19,7 @@ pin_method_mapping = {
     8: "display_camera_hof",
     9: "",
     10: "",
-    11: ""
+    11: "display_maps_meckesheim_heilbronn"
 }
 
 IRQ_PIN = 26
