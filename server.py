@@ -153,7 +153,6 @@ def i_show_soccer_table(liga):
 @monitor_handling
 @quit_camera
 def i_show_current_solar():
-    pass
     try:
         data = solar.read_data()  # a dictionary of solar data
         if data:
