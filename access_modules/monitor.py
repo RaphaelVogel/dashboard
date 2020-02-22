@@ -6,6 +6,7 @@ from threading import Timer
 
 logger = logging.getLogger("dashboard_logger")
 MONITOR_ON_TIME = 180.0
+g_timer = None
 
 
 class Status(Enum):
@@ -14,19 +15,32 @@ class Status(Enum):
 
 
 def switch_off():
+    global g_timer
     try:
         subprocess.call("vcgencmd display_power 0", shell=True)
+        if g_timer:
+            g_timer.cancel()
+            g_timer = None
     except CalledProcessError:
         logger.warning('Cannot switch off monitor')
 
 
 def switch_on():
+    global g_timer
     try:
         subprocess.call("vcgencmd display_power 1", shell=True)
-        timer = Timer(MONITOR_ON_TIME, switch_off)
-        timer.start()
+        g_timer = Timer(MONITOR_ON_TIME, switch_off)
+        g_timer.start()
     except CalledProcessError:
         logger.warning('Cannot switch on monitor')
+
+
+def reset_timer():
+    global g_timer
+    if g_timer:
+        g_timer.cancel()
+        g_timer = Timer(MONITOR_ON_TIME, switch_off)
+        g_timer.start()
 
 
 def status():

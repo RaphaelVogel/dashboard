@@ -42,6 +42,8 @@ def monitor_handling(func):
         status = monitor.status()
         if status is monitor.Status.OFF:
             monitor.switch_on()
+        else:
+            monitor.reset_timer()
         return func(*args, **kwargs)
 
     return wrapper
