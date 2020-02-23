@@ -15,7 +15,7 @@ def display_camera_data(number):
     lock.acquire()
     if not g_player:
         # first call
-        g_player = OMXPlayer(camera_url)
+        g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '-b', '--live'])
         g_timer = Timer(CAMERA_ON_TIME, quit_camera)
         g_timer.start()
         monitor.reset_timer()
