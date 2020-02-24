@@ -13,7 +13,7 @@ def display_camera_data(number):
     global g_player
     if not g_player:
         # first call - for parameters see https://github.com/popcornmix/omxplayer#synopsis
-        g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '-b', '--live'])
+        g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '--live'])
     else:
         if g_player.get_source() != camera_url:
             g_player.load(camera_url)  # play new stream

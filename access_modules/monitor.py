@@ -19,10 +19,10 @@ def switch_off():
     g_timer = None
 
 
-def switch_on():
+def switch_on(time=MONITOR_ON_TIME):
     global g_timer
     subprocess.call("vcgencmd display_power 1", shell=True)
-    g_timer = Timer(MONITOR_ON_TIME, switch_off)
+    g_timer = Timer(time, switch_off)
     g_timer.start()
 
 
@@ -34,9 +34,9 @@ def status():
         return Status.ON
 
 
-def reset_timer():
+def reset_timer(time=MONITOR_ON_TIME):
     global g_timer
     if g_timer:
         g_timer.cancel()
-        g_timer = Timer(MONITOR_ON_TIME, switch_off)
+        g_timer = Timer(time, switch_off)
         g_timer.start()
