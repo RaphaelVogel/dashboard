@@ -42,8 +42,7 @@ def monitor_handling(func):
 # decorator to quit camera if running
 def quit_camera(func):
     def wrapper(*args, **kwargs):
-        if camera.camera_active():
-            camera.quit_camera()
+        camera.quit_camera()
         return func(*args, **kwargs)
 
     return wrapper
