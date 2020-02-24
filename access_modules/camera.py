@@ -1,47 +1,41 @@
 from omxplayer.player import OMXPlayer  # pylint: disable=import-error
-from threading import Timer, Lock
+from threading import Lock
 from access_modules import cfg, monitor
 
 
 g_player = None
-g_timer = None
-CAMERA_ON_TIME = 100.0
 lock = Lock()
 
 
 def display_camera_data(number):
     camera_url = cfg['cam' + str(number)]['url']
-    global g_player, g_timer
     lock.acquire()
+    global g_player
     if not g_player:
-        # first call
+        # first call - for parameters see https://github.com/popcornmix/omxplayer#synopsis
         g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '-b', '--live'])
-        g_timer = Timer(CAMERA_ON_TIME, quit_camera)
-        g_timer.start()
         monitor.reset_timer()
     else:
         if g_player.get_source() != camera_url:
-            # play new stream
-            g_player.load(camera_url)
+            g_player.load(camera_url)  # play new stream
 
-        # reset camera and monitor timer
-        g_timer.cancel()
-        g_timer = Timer(CAMERA_ON_TIME, quit_camera)
-        g_timer.start()
+        # reset monitor timer
         monitor.reset_timer()
     lock.release()
 
 
 def quit_camera():
-    global g_player, g_timer
+    lock.acquire()
+    global g_player
     if g_player:
         g_player.quit()
         g_player = None
-    if g_timer:
-        g_timer.cancel()
-        g_timer = None
+    lock.release()
 
 
 def camera_active():
+    lock.acquire()
     global g_player
-    return g_player is not None
+    status = g_player is not None
+    lock.release()
+    return status
