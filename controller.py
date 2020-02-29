@@ -75,7 +75,7 @@ def setup_touch_loop():
                     # call function
                     globals()[function_name]()
 
-        time.sleep(0.15)  # Small delay get some CPU
+        time.sleep(0.10)
 
 
 if __name__ == '__main__':
