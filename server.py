@@ -112,7 +112,7 @@ def show_pic_of_the_day():
 
 @route('/displayCamera/<cam>')
 def display_camera(cam):
-    if cam == 2:
+    if cam == '2':
         # mjpeg stream camera
         chromium.open_url("localhost:8080/i_display_mjpeg_camera/" + cam)
     else:
