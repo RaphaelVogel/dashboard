@@ -56,7 +56,7 @@ def display_pic_of_the_day():
 
 
 def display_camera_hof():
-    chromium.open_url("localhost:8080/i_display_camera/1")
+    chromium.open_url("localhost:8080/i_display_rtsp_camera/1")
 
 
 def display_maps_meckesheim_heilbronn():

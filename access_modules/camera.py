@@ -1,13 +1,13 @@
 from omxplayer.player import OMXPlayer  # pylint: disable=import-error
 from threading import Lock
-from access_modules import cfg, monitor
+from access_modules import cfg, chromium
 
 
 g_player = None
 lock = Lock()
 
 
-def display_camera_data(number):
+def display_rtsp_stream(number):
     camera_url = cfg['cam' + str(number)]['url']
     lock.acquire()
     global g_player
@@ -18,12 +18,15 @@ def display_camera_data(number):
         if g_player.get_source() != camera_url:
             g_player.load(camera_url)  # play new stream
 
-    # reset monitor timer
-    monitor.reset_timer()
     lock.release()
 
 
-def quit_camera():
+def display_mjpeg_stream(number):
+    camera_url = cfg['cam' + str(number)]['url']
+    chromium.open_url(camera_url)
+
+
+def quit_rtsp_stream():
     lock.acquire()
     global g_player
     if g_player:

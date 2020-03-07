@@ -40,9 +40,9 @@ def monitor_handling(func):
 
 
 # decorator to quit camera if running
-def quit_camera(func):
+def quit_rtsp_stream(func):
     def wrapper(*args, **kwargs):
-        camera.quit_camera()
+        camera.quit_rtsp_stream()
         return func(*args, **kwargs)
 
     return wrapper
@@ -112,7 +112,12 @@ def show_pic_of_the_day():
 
 @route('/displayCamera/<cam>')
 def display_camera(cam):
-    chromium.open_url("localhost:8080/i_display_camera/" + cam)
+    if cam == 2:
+        # mjpeg stream camera
+        chromium.open_url("localhost:8080/i_display_mjpeg_camera/" + cam)
+    else:
+        # rtsp stream camera
+        chromium.open_url("localhost:8080/i_display_rtsp_camera/" + cam)
     return dict(status="OK")
 
 
@@ -128,7 +133,7 @@ def showURL(url_id):
 @route('/i_soccerTable/<liga>')
 @view('soccer_ranking')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_soccer_table(liga):
     data = soccer_table.get_table_data(liga)  # a list of dictionaries (each club one dictionary)
     return dict(liga=liga, table=data)
@@ -137,7 +142,7 @@ def i_show_soccer_table(liga):
 @route('/i_currentSolar')
 @view('current_solar')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_current_solar():
     data = solar.read_data()  # a dictionary of solar data
     if data:
@@ -149,7 +154,7 @@ def i_show_current_solar():
 @route('/i_currentTime')
 @view('current_time')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_current_time():
     return None
 
@@ -157,7 +162,7 @@ def i_show_current_time():
 @route('/i_soccerMatches/<liga>')
 @view('soccer_matches')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_soccer_matches(liga):
     data = soccer_table.get_match_data(liga)  # a list of dictionaries (each match one dictionary)
     return dict(liga=liga, matches=data)
@@ -166,21 +171,28 @@ def i_show_soccer_matches(liga):
 @route('/i_picOfTheDay')
 @view('pic_of_the_day')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_pic_of_the_day():
     ret_data = pic_of_the_day.get_pic_url()  # returns a dictionary with picture url and text
     return dict(data=ret_data)
 
 
-@route('/i_display_camera/<cam>')
+@route('/i_display_rtsp_camera/<cam>')
 @monitor_handling
-def i_display_camera(cam):
-    camera.display_camera_data(cam)
+def i_display_rtsp_camera(cam):
+    camera.display_rtsp_stream(cam)
+
+
+@route('/i_display_mjpeg_camera/<cam>')
+@monitor_handling
+@quit_rtsp_stream
+def i_display_mjpeg_camera(cam):
+    camera.display_mjpeg_stream(cam)
 
 
 @route('/i_show_url/<url_id>')
 @monitor_handling
-@quit_camera
+@quit_rtsp_stream
 def i_show_url(url_id):
     url_to_open = cfg['show_url'][url_id]
     chromium.open_url(url_to_open)

@@ -14,7 +14,7 @@ class Status(Enum):
 
 def switch_off():
     global g_timer
-    camera.quit_camera()
+    camera.quit_rtsp_stream()
     subprocess.call("vcgencmd display_power 0", shell=True)
     g_timer = None
 
