@@ -1,6 +1,6 @@
 from omxplayer.player import OMXPlayer  # pylint: disable=import-error
 from threading import Lock
-from access_modules import cfg, monitor, chromium
+from access_modules import cfg, monitor
 
 
 g_player = None
@@ -10,18 +10,13 @@ lock = Lock()
 def display_camera_data(number):
     camera_url = cfg['cam' + str(number)]['url']
     lock.acquire()
-    if number == 2:
-        # motion eye camera, open mjpeg URL in browser
-        chromium.open_url(camera_url)
+    global g_player
+    if not g_player:
+        # first call - for parameters see https://github.com/popcornmix/omxplayer#synopsis
+        g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '--live'])
     else:
-        # rtsp camera use OMX player to stream
-        global g_player
-        if not g_player:
-            # first call - for parameters see https://github.com/popcornmix/omxplayer#synopsis
-            g_player = OMXPlayer(camera_url, ['--no-osd', '--no-keys', '--live'])
-        else:
-            if g_player.get_source() != camera_url:
-                g_player.load(camera_url)  # play new stream
+        if g_player.get_source() != camera_url:
+            g_player.load(camera_url)  # play new stream
 
     # reset monitor timer
     monitor.reset_timer()
